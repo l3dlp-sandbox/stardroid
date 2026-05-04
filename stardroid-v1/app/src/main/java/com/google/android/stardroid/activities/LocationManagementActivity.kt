@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.FrameLayout
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
@@ -14,6 +15,7 @@ import com.google.android.stardroid.R
 import com.google.android.stardroid.activities.dialogs.LocationPermissionPermanentlyDeniedDialogFragment
 import com.google.android.stardroid.activities.dialogs.LocationPermissionRationaleDialogFragment
 import com.google.android.stardroid.activities.dialogs.ManualLocationEntryDialogFragment
+import com.google.android.stardroid.activities.util.MapAdapter
 import com.google.android.stardroid.control.LocationController
 import com.google.android.stardroid.control.LocationSource
 import com.google.android.stardroid.control.LocationState
@@ -24,12 +26,14 @@ import javax.inject.Inject
 class LocationManagementActivity : FragmentActivity() {
 
     @Inject lateinit var locationController: LocationController
+    @Inject lateinit var mapAdapter: MapAdapter
 
     private lateinit var sourceLabel: TextView
     private lateinit var coordinatesLabel: TextView
     private lateinit var mapContainer: FrameLayout
     private lateinit var modeToggleButton: Button
     private lateinit var changeButton: Button
+    private lateinit var progressBar: ProgressBar
 
     private val permissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
@@ -49,14 +53,19 @@ class LocationManagementActivity : FragmentActivity() {
         setContentView(R.layout.activity_location_management)
         setTitle(R.string.location_management_title)
 
-        sourceLabel = findViewById(R.id.location_source_label)
-        coordinatesLabel = findViewById(R.id.location_coordinates_label)
-        mapContainer = findViewById(R.id.map_container)
-        modeToggleButton = findViewById(R.id.location_mode_toggle_button)
-        changeButton = findViewById(R.id.location_change_button)
+        sourceLabel = findViewById<TextView>(R.id.location_source_label)
+        coordinatesLabel = findViewById<TextView>(R.id.location_coordinates_label)
+        mapContainer = findViewById<FrameLayout>(R.id.map_container)
+        modeToggleButton = findViewById<Button>(R.id.location_mode_toggle_button)
+        changeButton = findViewById<Button>(R.id.location_change_button)
+        progressBar = findViewById<ProgressBar>(R.id.location_acquiring_progress)
+
+        changeButton.text = getString(R.string.location_change)
 
         modeToggleButton.setOnClickListener { onModeToggle() }
         changeButton.setOnClickListener { showManualEntryDialog() }
+
+        initMap(savedInstanceState)
     }
 
     private val stateListener = LocationController.LocationStateCallback { state ->
@@ -66,18 +75,23 @@ class LocationManagementActivity : FragmentActivity() {
     override fun onResume() {
         super.onResume()
         locationController.addStateListener(stateListener)
-        initMap(savedInstanceState = null)
+        mapAdapter.onResume()
     }
 
     override fun onPause() {
         super.onPause()
         locationController.removeStateListener(stateListener)
-        teardownMap()
+        mapAdapter.onPause()
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        destroyMap()
+        mapAdapter.onDestroy()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        mapAdapter.onSaveInstanceState(outState)
     }
 
     private fun onModeToggle() {
@@ -133,6 +147,7 @@ class LocationManagementActivity : FragmentActivity() {
     }
 
     private fun updateUi(state: LocationState) {
+        progressBar.visibility = if (state is LocationState.Acquiring) View.VISIBLE else View.GONE
         when (state) {
             is LocationState.Confirmed -> {
                 val sourceStr = if (state.source == LocationSource.AUTO)
@@ -177,13 +192,22 @@ class LocationManagementActivity : FragmentActivity() {
 
     // Map lifecycle hooks — overridden in GMS instrumentation layer if needed, or handled via
     // runtime detection (see US6 tasks T040/T041)
-    protected open fun initMap(savedInstanceState: Bundle?) {}
-    protected open fun teardownMap() {}
-    protected open fun destroyMap() {}
-    protected open fun updateMapPin(state: LocationState.Confirmed) {
+    protected fun initMap(savedInstanceState: Bundle?) {
+        val mapView = findViewById<View>(R.id.map_view)
+        if (mapView != null) {
+            mapAdapter.initialize(mapView, savedInstanceState)
+        }
+    }
+    protected fun updateMapPin(state: LocationState.Confirmed) {
+        mapAdapter.updateLocation(state.location)
         showMapMessage("%.4f°, %.4f°".format(state.location.latitude, state.location.longitude))
     }
-    protected open fun showMapMessage(message: String) {
+    protected fun showMapMessage(message: String) {
+        val mapView = findViewById<View>(R.id.map_view)
+        if (mapView != null && mapView.visibility == View.VISIBLE) {
+            // In GMS flavor, if map is visible, we don't want to clear it with text
+            return
+        }
         mapContainer.removeAllViews()
         val tv = TextView(this)
         tv.text = message

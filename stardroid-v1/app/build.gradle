@@ -64,6 +64,7 @@ android {
         versionName "1.14.1:Jupiter"
         testInstrumentationRunner "com.google.android.stardroid.test.HiltTestRunner"
         resourceConfigurations += ['en', 'b+en+GB', 'ar', 'ca', 'cs', 'cy', 'da', 'de', 'el', 'es', 'fa', 'fr', 'hi', 'hu', 'id', 'it', 'ja', 'ko', 'ms', 'nb', 'nl', 'pl', 'pt', 'ru', 'sk', 'sl', 'sv', 'th', 'tr', 'uk', 'b+zh+Hans', 'b+zh+Hant']
+        manifestPlaceholders = [mapsApiKey: "unset"]
     }
 
     signingConfigs {
@@ -109,6 +110,13 @@ android {
         gms {
             resValue "string", "analytics_enabled", "true"
             dimension "sourciness"
+            if (project.file('no-checkin.properties').exists()) {
+                def signingProperties = new Properties()
+                signingProperties.load(project.file('no-checkin.properties').newDataInputStream())
+                if (signingProperties.containsKey('maps.api.key')) {
+                    manifestPlaceholders.mapsApiKey = signingProperties.getProperty('maps.api.key')
+                }
+            }
         }
 
         // uses only open source software

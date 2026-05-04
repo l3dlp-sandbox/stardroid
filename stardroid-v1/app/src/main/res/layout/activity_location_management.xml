@@ -24,7 +24,15 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:layout_marginBottom="16dp" />
+        android:layout_marginBottom="16dp">
+
+        <ProgressBar
+            android:id="@+id/location_acquiring_progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone" />
+    </FrameLayout>
 
     <Button
         android:id="@+id/location_mode_toggle_button"
