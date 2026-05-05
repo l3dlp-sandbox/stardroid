@@ -205,7 +205,12 @@ class LocationManagementActivity : FragmentActivity() {
     protected fun showMapMessage(message: String) {
         val mapView = findViewById<View>(R.id.map_view)
         if (mapView != null && mapView.visibility == View.VISIBLE) {
-            // In GMS flavor, if map is visible, we don't want to clear it with text
+            return
+        }
+        val fallbackLabel = findViewById<TextView>(R.id.map_unavailable_label)
+        if (fallbackLabel != null) {
+            fallbackLabel.text = message
+            fallbackLabel.visibility = View.VISIBLE
             return
         }
         mapContainer.removeAllViews()

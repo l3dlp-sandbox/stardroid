@@ -12,5 +12,5 @@ abstract class MapAdapterModule {
 
     @Binds
     @ActivityScoped
-    abstract fun bindMapAdapter(impl: FdroidMapAdapter): MapAdapter
+    abstract fun bindMapAdapter(impl: MapTilerAdapter): MapAdapter
 }

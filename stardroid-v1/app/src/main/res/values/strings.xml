@@ -63,6 +63,8 @@
     <string name="location_change" translation_description="Button to change or update the manually entered location">Change Location</string>
     <string name="location_map_no_location" translation_description="Message shown in the map area when no location is set">No location set — tap below to add one</string>
     <string name="location_map_acquiring" translation_description="Message shown in the map area while waiting for a GPS fix">Acquiring location…</string>
+    <string name="location_map_unavailable" translation_description="Message shown in the map area when the map image cannot be loaded">Map Unavailable</string>
+    <string name="location_map_content_description" translation_description="Accessibility description for the map image showing the user\'s location">Map showing your location</string>
     <string name="use_magnetic_correction" translation_description="Preference label: apply magnetic declination correction so the compass points to true north instead of magnetic north">Use magnetic correction</string>
     <string name="manual_compass_adjustment_title" translation_description="Preference title: lets the user add a manual degree offset to the compass reading">Additional compass adjustment</string>
     <string name="manual_compass_adjustment_summary" translation_description="Summary for the manual compass adjustment preference">Extra offset in degrees (+ or −) added to compass reading</string>
