@@ -115,6 +115,14 @@ public interface AnalyticsInterface {
   String LAYER_TOGGLED_EVENT = "layer_toggled_ev";
   String LAYER_TOGGLED_NAME = "layer_name";
   String LAYER_TOGGLED_ENABLED = "layer_enabled";
+  
+  // Map loading
+  String MAP_LOAD_EVENT = "map_load_ev";
+  String MAP_LOAD_SUCCESS = "success";
+  String MAP_LOAD_ERROR_CODE = "error_code";
+  String MAP_LOAD_PROVIDER = "provider";
+  String MAP_LOAD_PROVIDER_STADIA = "stadia";
+  String MAP_LOAD_PROVIDER_MAPTILER = "maptiler";
 
   Map<String, String> LAYER_NAME_MAP = Map.of(
       "source_provider.0", "stars",
