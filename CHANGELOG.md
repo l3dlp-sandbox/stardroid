@@ -5,7 +5,7 @@ All notable changes to Sky Map are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/).
 
-## [1.14.0] - 2026-04-28
+## [1.14.2] - 2026-05-05
 
 ### Added
 - **Virtual objects** — Jupiter's Galilean moons (Io, Europa, Ganymede, Callisto) and Mars's
