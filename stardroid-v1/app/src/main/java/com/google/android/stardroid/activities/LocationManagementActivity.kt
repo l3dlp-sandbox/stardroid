@@ -2,10 +2,14 @@ package com.google.android.stardroid.activities
 
 import android.Manifest
 import android.content.pm.PackageManager
+import android.graphics.Color
+import android.graphics.PorterDuff
 import android.os.Bundle
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Button
 import android.widget.FrameLayout
+import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
@@ -15,7 +19,11 @@ import com.google.android.stardroid.R
 import com.google.android.stardroid.activities.dialogs.LocationPermissionPermanentlyDeniedDialogFragment
 import com.google.android.stardroid.activities.dialogs.LocationPermissionRationaleDialogFragment
 import com.google.android.stardroid.activities.dialogs.ManualLocationEntryDialogFragment
+import com.google.android.stardroid.activities.util.ActivityLightLevelChanger
+import com.google.android.stardroid.activities.util.ActivityLightLevelManager
+import com.google.android.stardroid.activities.util.EdgeToEdgeFixer
 import com.google.android.stardroid.activities.util.MapAdapter
+import com.google.android.stardroid.activities.util.NightModeHelper
 import com.google.android.stardroid.control.LocationController
 import com.google.android.stardroid.control.LocationSource
 import com.google.android.stardroid.control.LocationState
@@ -23,10 +31,14 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class LocationManagementActivity : FragmentActivity() {
+class LocationManagementActivity : FragmentActivity(),
+    ActivityLightLevelChanger.NightModeable {
 
     @Inject lateinit var locationController: LocationController
     @Inject lateinit var mapAdapter: MapAdapter
+    @Inject lateinit var activityLightLevelManager: ActivityLightLevelManager
+
+    private var nightMode = false
 
     private lateinit var sourceLabel: TextView
     private lateinit var coordinatesLabel: TextView
@@ -51,6 +63,7 @@ class LocationManagementActivity : FragmentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_location_management)
+        EdgeToEdgeFixer.applyEdgeToEdgeFixForActionBarActivity(this)
         setTitle(R.string.location_management_title)
 
         sourceLabel = findViewById<TextView>(R.id.location_source_label)
@@ -68,20 +81,43 @@ class LocationManagementActivity : FragmentActivity() {
         initMap(savedInstanceState)
     }
 
+    override fun onStart() {
+        super.onStart()
+        EdgeToEdgeFixer.applyTopPaddingForActionBar(this, findViewById(android.R.id.content))
+    }
+
     private val stateListener = LocationController.LocationStateCallback { state ->
         runOnUiThread { updateUi(state) }
     }
 
     override fun onResume() {
         super.onResume()
+        activityLightLevelManager.onResume()
         locationController.addStateListener(stateListener)
         mapAdapter.onResume()
     }
 
     override fun onPause() {
         super.onPause()
+        activityLightLevelManager.onPause()
         locationController.removeStateListener(stateListener)
         mapAdapter.onPause()
+    }
+
+    override fun setNightMode(nightMode: Boolean) {
+        this.nightMode = nightMode
+        NightModeHelper.applyActionBarNightMode(actionBar, this, nightMode)
+        val textColor = if (nightMode) getColor(R.color.night_text_color) else Color.WHITE
+        val root = findViewById<View>(android.R.id.content)
+        if (root is ViewGroup) {
+            NightModeHelper.tintTextViews(root, textColor)
+        }
+        val mapView = findViewById<ImageView>(R.id.map_view)
+        if (nightMode) {
+            mapView?.setColorFilter(getColor(R.color.night_text_color), PorterDuff.Mode.MULTIPLY)
+        } else {
+            mapView?.clearColorFilter()
+        }
     }
 
     override fun onDestroy() {
