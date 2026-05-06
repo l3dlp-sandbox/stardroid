@@ -76,7 +76,6 @@ object ApplicationConstants {
   const val NO_AUTO_LOCATE_PREF_KEY = "no_auto_locate"
   const val LATITUDE_PREF_KEY = "latitude"
   const val LONGITUDE_PREF_KEY = "longitude"
-  const val LOCATION_PREF_KEY = "location"
 
   // Feature flags
   /** Set to true to enable the warm welcome onboarding flow. */

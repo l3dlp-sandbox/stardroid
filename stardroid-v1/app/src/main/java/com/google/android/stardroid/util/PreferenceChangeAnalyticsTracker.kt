@@ -30,7 +30,6 @@ class PreferenceChangeAnalyticsTracker @Inject internal constructor(private val 
   OnSharedPreferenceChangeListener {
   // Keys whose values may contain user-entered location data.
   private val blacklist: Set<String> = setOf(
-    ApplicationConstants.LOCATION_PREF_KEY,
     ApplicationConstants.LATITUDE_PREF_KEY,
     ApplicationConstants.LONGITUDE_PREF_KEY
   )
