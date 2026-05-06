@@ -9,8 +9,7 @@
     <string name="other_prefs" translation_description="Preferences category heading for miscellaneous settings">Øvrigt</string>
     <string name="controls_prefs" translation_description="Preferences category heading for touch control settings">Kontrolelementer</string>
     <string name="location_permission_dialog_title" translation_description="Title of the dialog that requests location permission from the user">Lokalisering påkrævet</string>
-    Sky Map har brug for din omtrentlige placering for at vise den korrekte nattehimmel. Du kan give tilladelse, angive din placering manuelt eller beslutte det senere. Hvis du beslutter det senere, vil kortet ikke være nøjagtigt, før din placering er blevet indstillet.
-    </string>
+    <string name="location_permission_dialog_message">Sky Map har brug for din omtrentlige placering for at vise den korrekte nattehimmel. Du kan give tilladelse, angive din placering manuelt eller beslutte det senere. Hvis du beslutter det senere, vil kortet ikke være nøjagtigt, før din placering er blevet indstillet.</string>
     <string name="location_permission_grant" translation_description="Button in the location permission dialog to grant location access">Giv tilladelse</string>
     <string name="location_permission_enter_manually" translation_description="Button in the location permission dialog to enter location by hand instead of granting permission">Angiv manuelt</string>
     <string name="location_permission_later" translation_description="Button in the location permission dialog to defer the decision">Senere</string>

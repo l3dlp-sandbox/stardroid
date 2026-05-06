@@ -9,8 +9,7 @@
     <string name="other_prefs" translation_description="Preferences category heading for miscellaneous settings">Lain-lain</string>
     <string name="controls_prefs" translation_description="Preferences category heading for touch control settings">Kawalan</string>
     <string name="location_permission_dialog_title" translation_description="Title of the dialog that requests location permission from the user">Lokasi Diperlukan</string>
-    Sky Map memerlukan lokasi anggaran Anda untuk menunjukkan langit malam yang betul. Anda dapat memberikan izin, memasukkan lokasi Anda secara manual, atau memutuskan nanti. Jika Anda memutuskan nanti, peta tidak akan tepat sehingga lokasi Anda telah ditetapkan.
-    </string>
+    <string name="location_permission_dialog_message">Sky Map memerlukan lokasi anggaran Anda untuk menunjukkan langit malam yang betul. Anda dapat memberikan izin, memasukkan lokasi Anda secara manual, atau memutuskan nanti. Jika Anda memutuskan nanti, peta tidak akan tepat sehingga lokasi Anda telah ditetapkan.</string>
     <string name="location_permission_grant" translation_description="Button in the location permission dialog to grant location access">Berikan Kebenaran</string>
     <string name="location_permission_enter_manually" translation_description="Button in the location permission dialog to enter location by hand instead of granting permission">Masukkan Secara Manual</string>
     <string name="location_permission_later" translation_description="Button in the location permission dialog to defer the decision">Kemudian</string>

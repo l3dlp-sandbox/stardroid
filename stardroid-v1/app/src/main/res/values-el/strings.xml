@@ -9,8 +9,7 @@
     <string name="other_prefs" translation_description="Preferences category heading for miscellaneous settings">Άλλα</string>
     <string name="controls_prefs" translation_description="Preferences category heading for touch control settings">Χειριστήρια</string>
     <string name="location_permission_dialog_title" translation_description="Title of the dialog that requests location permission from the user">Απαιτείται η τοποθεσία</string>
-    Το Sky Map χρειάζεται την κατά προσέγγιση τοποθεσία σας για να εμφανίσει τον σωστό νυχτερινό ουρανό. Μπορείτε να παραχωρήσετε άδεια, να εισάγετε την τοποθεσία σας χειροκίνητα ή να αποφασίσετε αργότερα. Εάν αποφασίσετε αργότερα, ο χάρτης δεν θα είναι ακριβής μέχρι να οριστεί η τοποθεσία σας.
-    </string>
+    <string name="location_permission_dialog_message">Το Sky Map χρειάζεται την κατά προσέγγιση τοποθεσία σας για να εμφανίσει τον σωστό νυχτερινό ουρανό. Μπορείτε να παραχωρήσετε άδεια, να εισάγετε την τοποθεσία σας χειροκίνητα ή να αποφασίσετε αργότερα. Εάν αποφασίσετε αργότερα, ο χάρτης δεν θα είναι ακριβής μέχρι να οριστεί η τοποθεσία σας.</string>
     <string name="location_permission_grant" translation_description="Button in the location permission dialog to grant location access">Χορήγηση Άδειας</string>
     <string name="location_permission_enter_manually" translation_description="Button in the location permission dialog to enter location by hand instead of granting permission">Χειροκίνητη Εισαγωγή</string>
     <string name="location_permission_later" translation_description="Button in the location permission dialog to defer the decision">Αργότερα</string>

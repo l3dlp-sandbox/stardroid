@@ -9,8 +9,7 @@
     <string name="other_prefs" translation_description="Preferences category heading for miscellaneous settings">Drugo</string>
     <string name="controls_prefs" translation_description="Preferences category heading for touch control settings">Upravljanje</string>
     <string name="location_permission_dialog_title" translation_description="Title of the dialog that requests location permission from the user">Lokacija je obvezna</string>
-    Sky Map potrebuje vašo približno lokacijo, da prikaže pravilno nočno nebo. Dovolite lahko dovoljenje, ročno vnesete lokacijo ali se odločite kasneje. Če se odločite kasneje, karta ne bo natančna, dokler ni nastavljena vaša lokacija.
-    </string>
+    <string name="location_permission_dialog_message">Sky Map potrebuje vašo približno lokacijo, da prikaže pravilno nočno nebo. Dovolite lahko dovoljenje, ročno vnesete lokacijo ali se odločite kasneje. Če se odločite kasneje, karta ne bo natančna, dokler ni nastavljena vaša lokacija.</string>
     <string name="location_permission_grant" translation_description="Button in the location permission dialog to grant location access">Odobri dovoljenje</string>
     <string name="location_permission_enter_manually" translation_description="Button in the location permission dialog to enter location by hand instead of granting permission">Vnesi ročno</string>
     <string name="location_permission_later" translation_description="Button in the location permission dialog to defer the decision">Kasneje</string>

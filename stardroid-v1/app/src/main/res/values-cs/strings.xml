@@ -9,8 +9,7 @@
     <string name="other_prefs" translation_description="Preferences category heading for miscellaneous settings">Ostatní</string>
     <string name="controls_prefs" translation_description="Preferences category heading for touch control settings">Ovládání</string>
     <string name="location_permission_dialog_title" translation_description="Title of the dialog that requests location permission from the user">Vyžaduje se poloha</string>
-    Sky Map potřebuje vaši přibližnou polohu, aby zobrazil správnou noční oblohu. Můžete udělit oprávnění, zadat svou polohu ručně nebo se rozhodnout později. Pokud se rozhodnete později, mapa nebude přesná, dokud nebude nastavena vaše poloha.
-    </string>
+    <string name="location_permission_dialog_message">Sky Map potřebuje vaši přibližnou polohu, aby zobrazil správnou noční oblohu. Můžete udělit oprávnění, zadat svou polohu ručně nebo se rozhodnout později. Pokud se rozhodnete později, mapa nebude přesná, dokud nebude nastavena vaše poloha.</string>
     <string name="location_permission_grant" translation_description="Button in the location permission dialog to grant location access">Udělit oprávnění</string>
     <string name="location_permission_enter_manually" translation_description="Button in the location permission dialog to enter location by hand instead of granting permission">Zadat ručně</string>
     <string name="location_permission_later" translation_description="Button in the location permission dialog to defer the decision">Později</string>

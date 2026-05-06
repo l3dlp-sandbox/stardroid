@@ -9,8 +9,7 @@
     <string name="other_prefs" translation_description="Preferences category heading for miscellaneous settings">Arall</string>
     <string name="controls_prefs" translation_description="Preferences category heading for touch control settings">Rheolaeth</string>
     <string name="location_permission_dialog_title" translation_description="Title of the dialog that requests location permission from the user">Lleoliad Angenrheidiol</string>
-    Mae angen i Sky Map eich lleoliad bras i ddangos yr awyr nos gywir. Gallwch roi caniatâd, nodi\'ch lleoliad â llaw, neu benderfynu yn ddiweddarach. Os byddwch yn penderfynu yn ddiweddarach, ni fydd y map yn gywir nes bod eich lleoliad wedi\'i osod.
-    </string>
+    <string name="location_permission_dialog_message">Mae angen i Sky Map eich lleoliad bras i ddangos yr awyr nos gywir. Gallwch roi caniatâd, nodi\'ch lleoliad â llaw, neu benderfynu yn ddiweddarach. Os byddwch yn penderfynu yn ddiweddarach, ni fydd y map yn gywir nes bod eich lleoliad wedi\'i osod.</string>
     <string name="location_permission_grant" translation_description="Button in the location permission dialog to grant location access">Caniatáu Caniatad</string>
     <string name="location_permission_enter_manually" translation_description="Button in the location permission dialog to enter location by hand instead of granting permission">Nodi\'n Llaw</string>
     <string name="location_permission_later" translation_description="Button in the location permission dialog to defer the decision">Yn Ddiweddarach</string>

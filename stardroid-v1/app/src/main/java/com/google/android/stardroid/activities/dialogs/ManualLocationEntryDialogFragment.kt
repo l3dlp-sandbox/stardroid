@@ -71,11 +71,13 @@ class ManualLocationEntryDialogFragment : DialogFragment() {
             return
         }
 
+        val appContext = requireContext().applicationContext
         Thread {
             try {
                 @Suppress("DEPRECATION")
-                val results = Geocoder(requireContext()).getFromLocationName(name, 1)
-                requireActivity().runOnUiThread {
+                val results = Geocoder(appContext).getFromLocationName(name, 1)
+                activity?.runOnUiThread {
+                    if (!isAdded) return@runOnUiThread
                     if (results.isNullOrEmpty()) {
                         showPlaceError(getString(R.string.location_place_not_found))
                     } else {
@@ -87,7 +89,8 @@ class ManualLocationEntryDialogFragment : DialogFragment() {
                     }
                 }
             } catch (e: IOException) {
-                requireActivity().runOnUiThread {
+                activity?.runOnUiThread {
+                    if (!isAdded) return@runOnUiThread
                     showPlaceError(getString(R.string.location_geocoder_offline))
                 }
             }

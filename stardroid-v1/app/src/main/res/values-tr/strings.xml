@@ -9,8 +9,7 @@
     <string name="other_prefs" translation_description="Preferences category heading for miscellaneous settings">Diğer</string>
     <string name="controls_prefs" translation_description="Preferences category heading for touch control settings">Kontroller</string>
     <string name="location_permission_dialog_title" translation_description="Title of the dialog that requests location permission from the user">Konum Gerekli</string>
-    Sky Map, doğru gece gökyüzünü göstermek için yaklaşık konumunuza ihtiyaç duyar. İzin verebilir, konumunuzu manuel olarak girebilir veya daha sonra karar verebilirsiniz. Daha sonra karar verirseniz, konumunuz ayarlanana kadar harita doğru olmayacaktır.
-    </string>
+    <string name="location_permission_dialog_message">Sky Map, doğru gece gökyüzünü göstermek için yaklaşık konumunuza ihtiyaç duyar. İzin verebilir, konumunuzu manuel olarak girebilir veya daha sonra karar verebilirsiniz. Daha sonra karar verirseniz, konumunuz ayarlanana kadar harita doğru olmayacaktır.</string>
     <string name="location_permission_grant" translation_description="Button in the location permission dialog to grant location access">İzin Ver</string>
     <string name="location_permission_enter_manually" translation_description="Button in the location permission dialog to enter location by hand instead of granting permission">Manuel Olarak Gir</string>
     <string name="location_permission_later" translation_description="Button in the location permission dialog to defer the decision">Daha Sonra</string>

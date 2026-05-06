@@ -8,11 +8,8 @@
     <string name="start_from_now" translation_description="Button in the time travel dialog to start time travelling from the current time">Почати з тепер</string>
     <string name="other_prefs" translation_description="Preferences category heading for miscellaneous settings">Інше</string>
     <string name="controls_prefs" translation_description="Preferences category heading for touch control settings">Керування</string>
-    якщо ввімк., навіть якщо доступне знаходження місця розташування через інтернет мережу
-    </string>
     <string name="location_permission_dialog_title" translation_description="Title of the dialog that requests location permission from the user">Потрібна геолокація</string>
-    Sky Map потребує вашого приблизного місцезнаходження, щоб показати правильне нічне небо. Ви можете надати дозвіл, ввести своє місцезнаходження вручну або вирішити пізніше. Якщо ви вирішите пізніше, карта не буде точною, доки ваше місцезнаходження не буде встановлено.
-    </string>
+    <string name="location_permission_dialog_message">Sky Map потребує вашого приблизного місцезнаходження, щоб показати правильне нічне небо. Ви можете надати дозвіл, ввести своє місцезнаходження вручну або вирішити пізніше. Якщо ви вирішите пізніше, карта не буде точною, доки ваше місцезнаходження не буде встановлено.</string>
     <string name="location_permission_grant" translation_description="Button in the location permission dialog to grant location access">Надати дозвіл</string>
     <string name="location_permission_enter_manually" translation_description="Button in the location permission dialog to enter location by hand instead of granting permission">Ввести вручну</string>
     <string name="location_permission_later" translation_description="Button in the location permission dialog to defer the decision">Пізніше</string>

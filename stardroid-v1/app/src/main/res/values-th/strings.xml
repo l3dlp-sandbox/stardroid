@@ -9,8 +9,7 @@
     <string name="other_prefs" translation_description="Preferences category heading for miscellaneous settings">อื่นๆ</string>
     <string name="controls_prefs" translation_description="Preferences category heading for touch control settings">การควบคุม</string>
     <string name="location_permission_dialog_title" translation_description="Title of the dialog that requests location permission from the user">จำเป็นต้องใช้ตำแหน่ง</string>
-    Sky Map ต้องการตำแหน่งโดยประมาณของคุณเพื่อแสดงท้องฟ้ายามค่ำคืนที่ถูกต้อง คุณสามารถให้สิทธิ์การเข้าถึง ป้อนตำแหน่งของคุณด้วยตนเอง หรือตัดสินใจภายหลัง หากคุณตัดสินใจภายหลัง แผนที่จะไม่แม่นยำจนกว่าจะตั้งค่าตำแหน่งของคุณ
-    </string>
+    <string name="location_permission_dialog_message">Sky Map ต้องการตำแหน่งโดยประมาณของคุณเพื่อแสดงท้องฟ้ายามค่ำคืนที่ถูกต้อง คุณสามารถให้สิทธิ์การเข้าถึง ป้อนตำแหน่งของคุณด้วยตนเอง หรือตัดสินใจภายหลัง หากคุณตัดสินใจภายหลัง แผนที่จะไม่แม่นยำจนกว่าจะตั้งค่าตำแหน่งของคุณ</string>
     <string name="location_permission_grant" translation_description="Button in the location permission dialog to grant location access">อนุญาตสิทธิ์</string>
     <string name="location_permission_enter_manually" translation_description="Button in the location permission dialog to enter location by hand instead of granting permission">ป้อนด้วยตนเอง</string>
     <string name="location_permission_later" translation_description="Button in the location permission dialog to defer the decision">ภายหลัง</string>

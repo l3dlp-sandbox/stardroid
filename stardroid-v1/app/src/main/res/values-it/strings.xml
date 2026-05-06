@@ -9,8 +9,7 @@
     <string name="other_prefs" translation_description="Preferences category heading for miscellaneous settings">Altro</string>
     <string name="controls_prefs" translation_description="Preferences category heading for touch control settings">Controlli</string>
     <string name="location_permission_dialog_title" translation_description="Title of the dialog that requests location permission from the user">Posizione richiesta</string>
-    Sky Map ha bisogno della tua posizione approssimativa per mostrare il cielo notturno corretto. Puoi concedere l\'autorizzazione, inserire la tua posizione manualmente o decidere più tardi. Se decidi più tardi, la mappa non sarà accurata finché la tua posizione non sarà stata impostata.
-    </string>
+    <string name="location_permission_dialog_message">Sky Map ha bisogno della tua posizione approssimativa per mostrare il cielo notturno corretto. Puoi concedere l\'autorizzazione, inserire la tua posizione manualmente o decidere più tardi. Se decidi più tardi, la mappa non sarà accurata finché la tua posizione non sarà stata impostata.</string>
     <string name="location_permission_grant" translation_description="Button in the location permission dialog to grant location access">Concedi autorizzazione</string>
     <string name="location_permission_enter_manually" translation_description="Button in the location permission dialog to enter location by hand instead of granting permission">Inserisci manualmente</string>
     <string name="location_permission_later" translation_description="Button in the location permission dialog to defer the decision">Più tardi</string>

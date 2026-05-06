@@ -9,14 +9,11 @@
     <string name="other_prefs" translation_description="Preferences category heading for miscellaneous settings">Sonstiges</string>
     <string name="controls_prefs" translation_description="Preferences category heading for touch control settings">Steuerung</string>
     <string name="location_permission_dialog_title" translation_description="Title of the dialog that requests location permission from the user">Standort erforderlich</string>
-    Sky Map benötigt Ihren ungefähren Standort, um den korrekten Nachthimmel anzuzeigen. Sie können die Berechtigung erteilen, Ihren Standort manuell einzugeben oder sich später entscheiden. Wenn Sie sich später entscheiden, ist die Karte nicht genau, bis Ihr Standort festgelegt wurde.
-    </string>
+    <string name="location_permission_dialog_message">Sky Map benötigt Ihren ungefähren Standort, um den korrekten Nachthimmel anzuzeigen. Sie können die Berechtigung erteilen, Ihren Standort manuell einzugeben oder sich später entscheiden. Wenn Sie sich später entscheiden, ist die Karte nicht genau, bis Ihr Standort festgelegt wurde.</string>
     <string name="location_permission_grant" translation_description="Button in the location permission dialog to grant location access">Berechtigung erteilen</string>
     <string name="location_permission_enter_manually" translation_description="Button in the location permission dialog to enter location by hand instead of granting permission">Manuell eingeben</string>
     <string name="location_permission_later" translation_description="Button in the location permission dialog to defer the decision">Später</string>
     <string name="location_set_auto" translation_description="Toast message when automatic location is acquired. %1$s is the place name or coordinates">Standort auf %1$s festgelegt</string>
-    Ihr Standort konnte nicht ermittelt werden. Sind Sie mit einem Mobilfunknetz verbunden?
-    </string>
     <string name="location_long_lat" translation_description="Formatted display of longitude and latitude. %1$.2f is longitude, %2$.2f is latitude">Längengrad:%1$s, Breitengrad:%2$s</string>
     <string name="use_magnetic_correction" translation_description="Preference label: apply magnetic declination correction so the compass points to true north instead of magnetic north">Magnetische Korrektur verwenden</string>
     <string name="manual_compass_adjustment_title" translation_description="Preference title: lets the user add a manual degree offset to the compass reading">Zusätzliche Kompassanpassung</string>

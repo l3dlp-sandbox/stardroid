@@ -9,8 +9,7 @@
     <string name="other_prefs" translation_description="Preferences category heading for miscellaneous settings">Overig</string>
     <string name="controls_prefs" translation_description="Preferences category heading for touch control settings">Bediening</string>
     <string name="location_permission_dialog_title" translation_description="Title of the dialog that requests location permission from the user">Locatie vereist</string>
-    Sky Map heeft uw geschatte locatie nodig om de juiste nachtelijke hemel weer te geven. U kunt toestemming geven, uw locatie handmatig invoeren of dit later beslissen. Als u dit later besluit, is de kaart niet nauwkeurig totdat uw locatie is ingesteld.
-    </string>
+    <string name="location_permission_dialog_message">Sky Map heeft uw geschatte locatie nodig om de juiste nachtelijke hemel weer te geven. U kunt toestemming geven, uw locatie handmatig invoeren of dit later beslissen. Als u dit later besluit, is de kaart niet nauwkeurig totdat uw locatie is ingesteld.</string>
     <string name="location_permission_grant" translation_description="Button in the location permission dialog to grant location access">Toestemming geven</string>
     <string name="location_permission_enter_manually" translation_description="Button in the location permission dialog to enter location by hand instead of granting permission">Handmatig invoeren</string>
     <!-- tm:omitted name="location_permission_later" reason="identical_to_source" -->
