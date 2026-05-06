@@ -37,21 +37,21 @@ import dagger.hilt.android.scopes.ActivityScoped;
 public class ControllerGroup implements Controller {
   private final static String TAG = MiscUtil.getTag(ControllerGroup.class);
   private final ArrayList<Controller> controllers = new ArrayList<Controller>();
-  private ZoomController zoomController;
-  private ManualOrientationController manualDirectionController;
-  private SensorOrientationController sensorOrientationController;
-  private TimeTravelClock timeTravelClock = new TimeTravelClock();
-  private TransitioningCompositeClock transitioningClock = new TransitioningCompositeClock(
+  private final ZoomController zoomController;
+  private final ManualOrientationController manualDirectionController;
+  private final SensorOrientationController sensorOrientationController;
+  private final TimeTravelClock timeTravelClock = new TimeTravelClock();
+  private final TransitioningCompositeClock transitioningClock = new TransitioningCompositeClock(
       timeTravelClock, new RealClock());
-  private TeleportingController teleportingController;
+  private final TeleportingController teleportingController;
   private boolean usingAutoMode = true;
   private AstronomerModel model;
-  private com.google.android.stardroid.control.LocationController locationController;
+  private final LocationController locationController;
 
   // TODO(jontayler): inject everything else.
   @Inject
   ControllerGroup(SensorOrientationController sensorOrientationController,
-                  com.google.android.stardroid.control.LocationController locationController) {
+                  LocationController locationController) {
     this.locationController = locationController;
     addController(locationController);
     this.sensorOrientationController = sensorOrientationController;
@@ -137,7 +137,7 @@ public class ControllerGroup implements Controller {
     return usingAutoMode;
   }
 
-  public com.google.android.stardroid.control.LocationController getLocationController() {
+  public LocationController getLocationController() {
     return locationController;
   }
 

@@ -11,6 +11,7 @@ import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.rule.GrantPermissionRule;
 
+import com.google.android.stardroid.ApplicationConstants;
 import com.google.android.stardroid.R;
 import com.google.android.stardroid.activities.CompassCalibrationActivity;
 import com.google.android.stardroid.activities.DynamicStarMapActivity;
@@ -71,8 +72,8 @@ public class DynamicStarMapActivityTest {
       editor.putBoolean(CompassCalibrationActivity.DONT_SHOW_CALIBRATION_DIALOG, true);
       // This just gets overriden by the app on startup editor.putBoolean("auto_mode",
       // false);
-      editor.putString("latitude", "37.7749");
-      editor.putString("longitude", "-122.4194");
+      editor.putString(ApplicationConstants.LATITUDE_PREF_KEY, "37.7749");
+      editor.putString(ApplicationConstants.LONGITUDE_PREF_KEY, "-122.4194");
       editor.commit();
     };
 
@@ -102,7 +103,7 @@ public class DynamicStarMapActivityTest {
     Context context = getInstrumentation().getTargetContext();
     SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(context).edit();
     editor.putBoolean(CompassCalibrationActivity.DONT_SHOW_CALIBRATION_DIALOG, true);
-    editor.putBoolean(LocationController.NO_AUTO_LOCATE, true); // This disables the Google Play Services check
+    editor.putBoolean(ApplicationConstants.NO_AUTO_LOCATE_PREF_KEY, true); // This disables the Google Play Services check
     editor.commit();
 
     Screengrab.setDefaultScreenshotStrategy(new UiAutomatorScreenshotStrategy());

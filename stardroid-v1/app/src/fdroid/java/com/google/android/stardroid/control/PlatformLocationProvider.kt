@@ -6,7 +6,9 @@ import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
 import android.os.Bundle
+import android.util.Log
 import com.google.android.stardroid.math.LatLong
+import com.google.android.stardroid.util.MiscUtil
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
@@ -33,6 +35,7 @@ class PlatformLocationProvider @Inject constructor(
                 activeListeners.add(listener)
             } catch (_: IllegalArgumentException) {
                 // Provider not supported on this device
+                Log.w(TAG, "Provider $provider not supported on this device")
             }
         }
     }
@@ -63,5 +66,9 @@ class PlatformLocationProvider @Inject constructor(
     override fun isAvailable(): Boolean {
         return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) ||
             locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
+    }
+
+    companion object {
+        private val TAG = MiscUtil.getTag(PlatformLocationProvider::class.java)
     }
 }

@@ -65,7 +65,6 @@ import com.google.android.stardroid.R;
 import com.google.android.stardroid.activities.dialogs.CreditsDialogFragment;
 import com.google.android.stardroid.activities.dialogs.EulaDialogFragment;
 import com.google.android.stardroid.activities.dialogs.HelpDialogFragment;
-import com.google.android.stardroid.activities.LocationManagementActivity;
 import com.google.android.stardroid.activities.dialogs.AcquiringLocationTimeoutDialogFragment;
 import com.google.android.stardroid.activities.dialogs.LocationPermissionPermanentlyDeniedDialogFragment;
 import com.google.android.stardroid.activities.dialogs.LocationPermissionRationaleDialogFragment;
@@ -83,7 +82,6 @@ import com.google.android.stardroid.activities.util.GooglePlayServicesChecker;
 import com.google.android.stardroid.activities.util.MenuUtils;
 import com.google.android.stardroid.activities.util.NightModeHelper;
 import com.google.android.stardroid.activities.util.TooltipUtil;
-import com.google.android.stardroid.base.Lists;
 import com.google.android.stardroid.control.AstronomerModel;
 import com.google.android.stardroid.control.AstronomerModel.Pointing;
 import com.google.android.stardroid.control.ControllerGroup;
@@ -180,7 +178,7 @@ public class DynamicStarMapActivity extends androidx.fragment.app.FragmentActivi
 
   private static void updateViewDirectionMode(AstronomerModel model,
       SharedPreferences sharedPreferences) {
-    String viewDirectionMode = sharedPreferences.getString(ApplicationConstants.VIEW_MODE_PREFKEY, "STANDARD");
+    String viewDirectionMode = sharedPreferences.getString(ApplicationConstants.VIEW_MODE_PREF_KEY, "STANDARD");
     switch (viewDirectionMode) {
       case "ROTATE90":
         model.setViewDirectionMode(AstronomerModel.ViewDirectionMode.ROTATE90);
@@ -952,7 +950,7 @@ public class DynamicStarMapActivity extends androidx.fragment.app.FragmentActivi
         }
         setAutoMode(autoMode);
         break;
-      case ApplicationConstants.VIEW_MODE_PREFKEY:
+      case ApplicationConstants.VIEW_MODE_PREF_KEY:
         updateViewDirectionMode(model, sharedPreferences);
         break;
       default:

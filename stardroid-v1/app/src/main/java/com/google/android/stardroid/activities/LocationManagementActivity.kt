@@ -191,8 +191,8 @@ class LocationManagementActivity : FragmentActivity(),
                 else
                     getString(R.string.location_source_manual)
                 sourceLabel.text = sourceStr
-                coordinatesLabel.text = "%.4f°, %.4f°".format(
-                    state.location.latitude, state.location.longitude
+                coordinatesLabel.text = getString(
+                    R.string.location_long_lat, state.location.longitude, state.location.latitude
                 )
                 coordinatesLabel.visibility = View.VISIBLE
                 modeToggleButton.text = if (state.source == LocationSource.AUTO)
@@ -236,7 +236,9 @@ class LocationManagementActivity : FragmentActivity(),
     }
     protected fun updateMapPin(state: LocationState.Confirmed) {
         mapAdapter.updateLocation(state.location)
-        showMapMessage("%.4f°, %.4f°".format(state.location.latitude, state.location.longitude))
+        showMapMessage(getString(
+            R.string.location_long_lat,
+            state.location.longitude, state.location.latitude))
     }
     protected fun showMapMessage(message: String) {
         val mapView = findViewById<View>(R.id.map_view)

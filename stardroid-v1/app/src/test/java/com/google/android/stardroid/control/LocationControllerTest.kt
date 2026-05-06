@@ -145,8 +145,8 @@ class LocationControllerTest {
     @Test
     fun setManualLocation_savesPreferences() {
         controller.setManualLocation(london)
-        verify(prefEditor).putString("latitude", london.latitude.toString())
-        verify(prefEditor).putString("longitude", london.longitude.toString())
+        verify(prefEditor).putString(ApplicationConstants.LATITUDE_PREF_KEY, london.latitude.toString())
+        verify(prefEditor).putString(ApplicationConstants.LONGITUDE_PREF_KEY, london.longitude.toString())
         verify(prefEditor).putBoolean(ApplicationConstants.NO_AUTO_LOCATE_PREF_KEY, true)
     }
 }

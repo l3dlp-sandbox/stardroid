@@ -6,6 +6,7 @@ import android.content.SharedPreferences
 import android.location.Geocoder
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.PermissionChecker
@@ -16,6 +17,9 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import java.util.Locale
 import javax.inject.Inject
 import javax.inject.Singleton
+import androidx.core.content.edit
+import com.google.android.stardroid.R
+import com.google.android.stardroid.util.MiscUtil
 
 @Singleton
 class LocationController @Inject constructor(
@@ -100,11 +104,11 @@ class LocationController @Inject constructor(
     fun setManualLocation(location: LatLong) {
         cancelAcquiringTimeout()
         locationProvider.stopUpdates()
-        preferences.edit()
-            .putString("latitude", location.latitude.toString())
-            .putString("longitude", location.longitude.toString())
-            .putBoolean(ApplicationConstants.NO_AUTO_LOCATE_PREF_KEY, true)
-            .apply()
+        preferences.edit {
+            putString(ApplicationConstants.LATITUDE_PREF_KEY, location.latitude.toString())
+            putString(ApplicationConstants.LONGITUDE_PREF_KEY, location.longitude.toString())
+            putBoolean(ApplicationConstants.NO_AUTO_LOCATE_PREF_KEY, true)
+        }
         astronomerModel.setLocation(location)
         transitionTo(
             LocationState.Confirmed(
@@ -118,14 +122,18 @@ class LocationController @Inject constructor(
     }
 
     fun switchToAuto() {
-        preferences.edit().putBoolean(ApplicationConstants.NO_AUTO_LOCATE_PREF_KEY, false).apply()
+        preferences.edit { 
+            putBoolean(ApplicationConstants.NO_AUTO_LOCATE_PREF_KEY, false) 
+        }
         startAuto()
     }
 
     fun switchToManual() {
         locationProvider.stopUpdates()
         cancelAcquiringTimeout()
-        preferences.edit().putBoolean(ApplicationConstants.NO_AUTO_LOCATE_PREF_KEY, true).apply()
+        preferences.edit { 
+            putBoolean(ApplicationConstants.NO_AUTO_LOCATE_PREF_KEY, true)
+        }
     }
 
     fun keepWaiting() {
@@ -145,14 +153,15 @@ class LocationController @Inject constructor(
         } else {
             Float.MAX_VALUE
         }
-        val minDistanceDegrees = ApplicationConstants.LOCATION_UPDATE_MIN_DISTANCE_METRES / 111_320f
+        val minDistanceDegrees = ApplicationConstants.LOCATION_UPDATE_MIN_DISTANCE_METRES /
+            ApplicationConstants.METERS_PER_DEGREE_LATITUDE
         if (distanceDegrees >= minDistanceDegrees) {
             cancelAcquiringTimeout()
             astronomerModel.setLocation(location)
-            preferences.edit()
-                .putString("latitude", location.latitude.toString())
-                .putString("longitude", location.longitude.toString())
-                .apply()
+            preferences.edit {
+                putString(ApplicationConstants.LATITUDE_PREF_KEY, location.latitude.toString())
+                putString(ApplicationConstants.LONGITUDE_PREF_KEY, location.longitude.toString())
+            }
             val confirmed = LocationState.Confirmed(
                 location = location,
                 source = LocationSource.AUTO,
@@ -180,8 +189,8 @@ class LocationController @Inject constructor(
     }
 
     private fun loadManualLocation() {
-        val latStr = preferences.getString("latitude", "")
-        val lonStr = preferences.getString("longitude", "")
+        val latStr = preferences.getString(ApplicationConstants.LATITUDE_PREF_KEY, "")
+        val lonStr = preferences.getString(ApplicationConstants.LONGITUDE_PREF_KEY, "")
         if (!latStr.isNullOrEmpty() && !lonStr.isNullOrEmpty()) {
             try {
                 val lat = latStr.toFloat()
@@ -200,6 +209,7 @@ class LocationController @Inject constructor(
                     return
                 }
             } catch (_: NumberFormatException) {
+                Log.w(TAG, "Loaded invalid location from preferences $latStr, $lonStr")
             }
         }
         transitionTo(LocationState.Unset)
@@ -208,7 +218,10 @@ class LocationController @Inject constructor(
     private fun showLocationToast(location: LatLong) {
         Thread {
             val name = tryReverseGeocode(location)
-            val msg = name ?: "%.4f°, %.4f°".format(location.latitude, location.longitude)
+            val locName = name ?: context.getString(
+                R.string.location_long_lat).format(
+                location.latitude, location.longitude)
+            val msg = context.getString(R.string.location_set_auto).format(locName)
             handler.post { Toast.makeText(context, msg, Toast.LENGTH_SHORT).show() }
         }.start()
     }
@@ -225,5 +238,9 @@ class LocationController @Inject constructor(
 
     override fun setEnabled(enabled: Boolean) {
         this.enabled = enabled
+    }
+
+    companion object {
+        private val TAG = MiscUtil.getTag(LocationController::class.java)
     }
 }

@@ -71,10 +71,11 @@ class StadiaMapsAdapter @Inject constructor(
 
         // Stadia Maps Static Map URL
         // https://tiles.stadiamaps.com/static/alidade_smooth.png?api_key={key}&center={lat},{lon}&zoom=12&size={width}x{height}&markers={lat},{lon}
-        val urlStr = "https://tiles.stadiamaps.com/static/alidade_smooth.png?" +
+        // See https://stadiamaps.com/products/maps/map-styles/ for map styles.
+        val urlStr = "https://tiles.stadiamaps.com/static/stamen_toner_dark.png?" +
                 "api_key=$key" +
                 "&center=${location.latitude},${location.longitude}" +
-                "&zoom=12" +
+                "&zoom=11" +
                 "&size=${width}x${height}" +
                 "&markers=${location.latitude},${location.longitude}"
 

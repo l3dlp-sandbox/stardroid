@@ -19,6 +19,8 @@ class FusedLocationProvider @Inject constructor(
     @SuppressLint("MissingPermission")
     override fun startUpdates(minDistanceMetres: Float, onUpdate: (LatLong, Float?) -> Unit) {
         stopUpdates()
+        // The second argument "0" means send updates "as fast as possible" but it is tempered
+        // by the minimum updat requirement.
         val request = LocationRequest.Builder(Priority.PRIORITY_BALANCED_POWER_ACCURACY, 0L)
             .setMinUpdateDistanceMeters(minDistanceMetres)
             .build()

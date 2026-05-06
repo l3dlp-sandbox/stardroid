@@ -73,12 +73,7 @@ public class EditSettingsActivity extends PreferenceActivity
       addPreferencesFromResource(R.xml.preference_screen);
     }
   }
-  /**
-   * These must match the keys in the preference_screen.xml file.
-   */
-  private static final String LONGITUDE = "longitude";
-  private static final String LATITUDE = "latitude";
-  private static final String LOCATION = "location";
+
   private static final String TAG = MiscUtil.getTag(EditSettingsActivity.class);
 
   private boolean nightMode = false;
@@ -116,9 +111,12 @@ public class EditSettingsActivity extends PreferenceActivity
     View rootView = findViewById(android.R.id.content);
     EdgeToEdgeFixer.applyTopPaddingForActionBar(this, rootView);
 
-    final Preference locationPreference = preferenceFragment.findPreference(LOCATION);
-    Preference latitudePreference = preferenceFragment.findPreference(LATITUDE);
-    Preference longitudePreference = preferenceFragment.findPreference(LONGITUDE);
+    final Preference locationPreference = preferenceFragment.findPreference(
+        ApplicationConstants.LOCATION_PREF_KEY);
+    Preference latitudePreference = preferenceFragment.findPreference(
+        ApplicationConstants.LATITUDE_PREF_KEY);
+    Preference longitudePreference = preferenceFragment.findPreference(
+        ApplicationConstants.LONGITUDE_PREF_KEY);
     locationPreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
 
       public boolean onPreferenceChange(Preference preference, Object newValue) {
@@ -230,8 +228,10 @@ public class EditSettingsActivity extends PreferenceActivity
   }
 
   private void setLatLong(double latitude, double longitude) {
-    EditTextPreference latPreference = (EditTextPreference) preferenceFragment.findPreference(LATITUDE);
-    EditTextPreference longPreference = (EditTextPreference) preferenceFragment.findPreference(LONGITUDE);
+    EditTextPreference latPreference = (EditTextPreference) preferenceFragment.findPreference(
+        ApplicationConstants.LATITUDE_PREF_KEY);
+    EditTextPreference longPreference = (EditTextPreference) preferenceFragment.findPreference(
+        ApplicationConstants.LONGITUDE_PREF_KEY);
     latPreference.setText(Double.toString(latitude));
     longPreference.setText(Double.toString(longitude));
     String message = String.format(getString(R.string.location_place_found), latitude, longitude);
