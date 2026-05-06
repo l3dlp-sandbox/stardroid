@@ -20,12 +20,14 @@ import javax.inject.Singleton
 import androidx.core.content.edit
 import com.google.android.stardroid.R
 import com.google.android.stardroid.util.MiscUtil
+import java.util.concurrent.ScheduledExecutorService
 
 @Singleton
 class LocationController @Inject constructor(
     private val locationProvider: LocationProvider,
     private val astronomerModel: AstronomerModel,
     private val preferences: SharedPreferences,
+    private val backgroundExecutor: ScheduledExecutorService,
     @ApplicationContext private val context: Context
 ) : AbstractController() {
 
@@ -216,14 +218,14 @@ class LocationController @Inject constructor(
     }
 
     private fun showLocationToast(location: LatLong) {
-        Thread {
+        backgroundExecutor.execute {
             val name = tryReverseGeocode(location)
             val locName = name ?: context.getString(
                 R.string.location_long_lat).format(
                 location.latitude, location.longitude)
             val msg = context.getString(R.string.location_set_auto).format(locName)
             handler.post { Toast.makeText(context, msg, Toast.LENGTH_SHORT).show() }
-        }.start()
+        }
     }
 
     @Suppress("DEPRECATION")

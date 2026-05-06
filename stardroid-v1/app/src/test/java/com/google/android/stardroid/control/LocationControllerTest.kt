@@ -18,6 +18,7 @@ import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.RuntimeEnvironment
+import java.util.concurrent.ScheduledExecutorService
 
 @RunWith(RobolectricTestRunner::class)
 class LocationControllerTest {
@@ -27,6 +28,7 @@ class LocationControllerTest {
     @Mock private lateinit var activity: Activity
     @Mock private lateinit var preferences: SharedPreferences
     @Mock private lateinit var prefEditor: SharedPreferences.Editor
+    @Mock private lateinit var backgroundExecutor: ScheduledExecutorService
 
     private lateinit var controller: LocationController
 
@@ -44,7 +46,8 @@ class LocationControllerTest {
         `when`(activity.applicationContext).thenReturn(RuntimeEnvironment.getApplication())
         `when`(locationProvider.isAvailable()).thenReturn(true)
 
-        controller = LocationController(locationProvider, astronomerModel, preferences, activity)
+        controller = LocationController(
+            locationProvider, astronomerModel, preferences, backgroundExecutor, activity)
         controller.setModel(astronomerModel)
     }
 

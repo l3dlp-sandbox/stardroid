@@ -13,12 +13,14 @@ import com.google.android.stardroid.control.LocationController
 import com.google.android.stardroid.math.LatLong
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.IOException
+import java.util.concurrent.ScheduledExecutorService
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class ManualLocationEntryDialogFragment : DialogFragment() {
 
     @Inject lateinit var locationController: LocationController
+    @Inject lateinit var backgroundExecutor: ScheduledExecutorService
 
     private lateinit var placeNameEdit: EditText
     private lateinit var latEdit: EditText
@@ -72,7 +74,7 @@ class ManualLocationEntryDialogFragment : DialogFragment() {
         }
 
         val appContext = requireContext().applicationContext
-        Thread {
+        backgroundExecutor.execute {
             try {
                 @Suppress("DEPRECATION")
                 val results = Geocoder(appContext).getFromLocationName(name, 1)
@@ -94,7 +96,7 @@ class ManualLocationEntryDialogFragment : DialogFragment() {
                     showPlaceError(getString(R.string.location_geocoder_offline))
                 }
             }
-        }.start()
+        }
     }
 
     private fun showPlaceError(message: String) {
