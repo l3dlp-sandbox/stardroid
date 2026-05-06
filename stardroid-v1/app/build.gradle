@@ -60,7 +60,7 @@ android {
         applicationId 'com.google.android.stardroid'
         minSdk 26
         targetSdk 36
-        versionCode 1655
+        versionCode 1656
         versionName "1.14.3:Jupiter"
         testInstrumentationRunner "com.google.android.stardroid.test.HiltTestRunner"
         resourceConfigurations += ['en', 'b+en+GB', 'ar', 'ca', 'cs', 'cy', 'da', 'de', 'el', 'es', 'fa', 'fr', 'hi', 'hu', 'id', 'it', 'ja', 'ko', 'ms', 'nb', 'nl', 'pl', 'pt', 'ru', 'sk', 'sl', 'sv', 'th', 'tr', 'uk', 'b+zh+Hans', 'b+zh+Hant']
@@ -160,6 +160,9 @@ dependencies {
     // Lite version for Android - it's lighter (obviously) but also doesn't use reflection
     // which can cause no end of problems with minifiers like proguard.
     implementation 'com.google.protobuf:protobuf-javalite:3.13.0'
+
+    // Image loading and caching
+    implementation "io.coil-kt:coil:2.7.0"
 
 // Flavor
     gmsImplementation platform('com.google.firebase:firebase-bom:33.7.0')
