@@ -4,39 +4,18 @@
     <string name="menu_settings" translation_description="Settings menu item in the options menu">การตั้งค่า</string>
     <string name="menu_search" translation_description="Search menu item in the options menu">ค้นหา</string>
     <string name="cancel" translation_description="Generic cancel button label used in dialogs">ยกเลิก</string>
-    <string name="set" translation_description="Button label. Set the date to the given value">ตั้งค่า</string>
     <string name="go" translation_description="Button to start navigating the sky map toward a searched object">ไป!</string>
     <string name="start_from_now" translation_description="Button in the time travel dialog to start time travelling from the current time">เริ่มจากตอนนี้</string>
     <string name="other_prefs" translation_description="Preferences category heading for miscellaneous settings">อื่นๆ</string>
-    <string name="location_prefs" translation_description="Preferences category heading for location-related settings">การตั้งค่าตำแหน่ง</string>
     <string name="controls_prefs" translation_description="Preferences category heading for touch control settings">การควบคุม</string>
-    <string name="force_gps_pref" translation_description="Preference label: force GPS use even when network location is available">ใช้ GPS เสมอ</string>
-    <string name="force_gps_pref_hint" translation_description="this string continues from \'Always use GPS\'">หากเปิดใช้งาน แม้ว่าตำแหน่งเครือข่ายพร้อมใช้งาน</string>
-    <string name="no_use_gps_pref" translation_description="Preference label: choose to enter location by hand instead of using GPS or phone location">ตั้งตำแหน่งด้วยตนเอง</string>
-    <string name="no_use_gps_pref_hint" translation_description="Hint text beneath the \'Set location manually\' preference">ป้อนสถานที่หรือละติจูด/ลองจิจูดด้านล่าง</string>
-    <string name="location_placename" translation_description="Label for the place-name text field in manual location settings">ชื่อสถานที่</string>
-    <string name="location_placename_hint" translation_description="An example address.  Translators: please pick an address suitable for your country.  If it has an astronomical connection (e.g. the address of an observatory or famous astronomer) then that would be even better.">เช่น 1400 West Mars Hill Road, Flagstaff, AZ.</string>
-    <string name="location_lat_pref" translation_description="Label for the latitude input field in manual location settings">ละติจูด</string>
-    <string name="location_long_pref" translation_description="Label for the longitude input field in manual location settings">ลองจิจูด</string>
-    <string name="degrees" translation_description="angular degrees - used for latitude and longitude">องศา</string>
-    <!-- tm:omitted name="preferences" reason="identical_to_source" -->
-    <string name="location_offer_to_enable" translation_description="Dialog message asking whether to enable automatic location">ปิดใช้งานการระบุตำแหน่งอัตโนมัติ คุณต้องการเปิดใช้งานหรือไม่</string>
-    <string name="location_offer_to_enable_gps_title" translation_description="Title of dialog shown when automatic location is disabled">ปิดใช้งานการระบุตำแหน่งอัตโนมัติ</string>
     <string name="location_permission_dialog_title" translation_description="Title of the dialog that requests location permission from the user">จำเป็นต้องใช้ตำแหน่ง</string>
-    <string name="location_permission_dialog_message" translation_description="Body text of the dialog requesting location permission, explaining why the app needs it and what happens without it">
     Sky Map ต้องการตำแหน่งโดยประมาณของคุณเพื่อแสดงท้องฟ้ายามค่ำคืนที่ถูกต้อง คุณสามารถให้สิทธิ์การเข้าถึง ป้อนตำแหน่งของคุณด้วยตนเอง หรือตัดสินใจภายหลัง หากคุณตัดสินใจภายหลัง แผนที่จะไม่แม่นยำจนกว่าจะตั้งค่าตำแหน่งของคุณ
     </string>
     <string name="location_permission_grant" translation_description="Button in the location permission dialog to grant location access">อนุญาตสิทธิ์</string>
     <string name="location_permission_enter_manually" translation_description="Button in the location permission dialog to enter location by hand instead of granting permission">ป้อนด้วยตนเอง</string>
     <string name="location_permission_later" translation_description="Button in the location permission dialog to defer the decision">ภายหลัง</string>
-    <string name="location_warning_permission" translation_description="Warning message shown when location is unavailable because permission was not granted">ไม่สามารถใช้ตำแหน่ง — ไม่ได้รับสิทธิ์</string>
-    <string name="location_warning_manual" translation_description="Warning message shown when manual location mode is selected but no coordinates have been entered">ไม่ได้ตั้งค่าตำแหน่ง — โปรดกำหนดค่าในการตั้งค่า</string>
     <string name="location_set_auto" translation_description="Toast message when automatic location is acquired. %1$s is the place name or coordinates">ตั้งค่าตำแหน่งเป็น %1$s</string>
-    <string name="location_unable_to_geocode" translation_description="Error message when converting a place name to coordinates (geocoding) fails, possibly due to no network">ไม่สามารถถอดรหัสตำแหน่งของคุณได้ - บางทีเครือข่ายของคุณอาจไม่พร้อมใช้งาน</string>
-    <string name="location_not_found_title" translation_description="dialog box title when location not found">ขออภัย</string>
-    <string name="location_not_found" translation_description="dialog message when placename not found">%s ไม่พบ</string>
     <string name="location_long_lat" translation_description="Formatted display of longitude and latitude. %1$.2f is longitude, %2$.2f is latitude">ลองจิจูด:%1$.2f, ละติจูด:%2$.2f</string>
-    <string name="location_place_found" translation_description="Status message when a place name was successfully looked up. %1$f is latitude, %2$f is longitude">พบสถานที่ กำลังตั้งค่าละติจูด %1$f และลองจิจูด %2$f</string>
     <string name="use_magnetic_correction" translation_description="Preference label: apply magnetic declination correction so the compass points to true north instead of magnetic north">ใช้การแก้ไขแม่เหล็ก</string>
     <string name="manual_compass_adjustment_title" translation_description="Preference title: lets the user add a manual degree offset to the compass reading">การปรับเข็มทิศเพิ่มเติม</string>
     <string name="manual_compass_adjustment_summary" translation_description="Summary for the manual compass adjustment preference">ออฟเซ็ตเพิ่มเติมในหน่วยองศา (+ หรือ −) ที่เพิ่มเข้าไปในการอ่านเข็มทิศ</string>
@@ -60,7 +39,6 @@
     <string name="show_sky_gradient_preference_title" translation_description="Setting toggle title: whether to show the blue sky gradient during the day">แสดงการไล่ระดับสีท้องฟ้า</string>
     <string name="show_sky_gradient_preference_summary" translation_description="Setting toggle summary for sky gradient: explains what the feature does">ทำให้ท้องฟ้าเป็นสีน้ำเงินใกล้ดวงอาทิตย์และมืดในด้านตรงข้าม</string>
     <string name="ecliptic" translation_description="Label for the ecliptic layer — the apparent annual path of the Sun across the sky">สุริยวิถี</string>
-    <string name="malformed_loc_error" translation_description="Error message when a non-numeric value is entered for latitude or longitude">ค่าละติจูดหรือลองจิจูดไม่ใช่ตัวเลข</string>
     <string name="dialog_accept" translation_description="accepting the licence agreement">ยอมรับ</string>
     <string name="dialog_decline" translation_description="declining the licence agreement">ไม่ขอบคุณ</string>
     <string name="dialog_ok_button" translation_description="Generic OK/confirm button label for dialogs">ตกลง</string>

@@ -80,8 +80,9 @@ class ManualLocationEntryDialogFragment : DialogFragment() {
                         showPlaceError(getString(R.string.location_place_not_found))
                     } else {
                         val result = results[0]
-                        latEdit.setText("%.6f".format(result.latitude))
-                        lonEdit.setText("%.6f".format(result.longitude))
+                        val format = getString(R.string.location_coordinate_format)
+                        latEdit.setText(format.format(result.latitude))
+                        lonEdit.setText(format.format(result.longitude))
                         placeErrorText.visibility = View.GONE
                     }
                 }

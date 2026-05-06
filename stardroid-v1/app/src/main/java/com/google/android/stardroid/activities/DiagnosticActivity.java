@@ -95,8 +95,8 @@ public class DiagnosticActivity extends androidx.fragment.app.FragmentActivity
     android.view.View rootView = findViewById(android.R.id.content);
     EdgeToEdgeFixer.applyTopPaddingForActionBar(this, rootView);
 
-    setText(R.id.diagnose_phone_txt, Build.MODEL + " (" + Build.HARDWARE + ") " +
-        Locale.getDefault().getLanguage());
+    setText(R.id.diagnose_phone_txt, getString(R.string.diagnostics_phone_format,
+        Build.MODEL, Build.HARDWARE, Locale.getDefault().getLanguage()));
     String androidVersion = String.format(Build.VERSION.RELEASE + " (%d)", Build.VERSION.SDK_INT);
     setText(R.id.diagnose_android_version_txt, androidVersion);
 
@@ -195,9 +195,9 @@ public class DiagnosticActivity extends androidx.fragment.app.FragmentActivity
     String locationMessage;
     if (locationState instanceof LocationState.Confirmed) {
       LocationState.Confirmed confirmed = (LocationState.Confirmed) locationState;
-      locationMessage = confirmed.getLocation().getLatitude() + "°, "
-          + confirmed.getLocation().getLongitude() + "° ("
-          + confirmed.getSource().name().toLowerCase() + ")";
+      locationMessage = getString(R.string.location_diagnostic_format,
+          confirmed.getLocation().getLatitude(), confirmed.getLocation().getLongitude(),
+          confirmed.getSource().name().toLowerCase());
     } else {
       locationMessage = locationState.getClass().getSimpleName();
     }
@@ -212,7 +212,8 @@ public class DiagnosticActivity extends androidx.fragment.app.FragmentActivity
             + getString(R.string.degrees));
     AstronomerModel.Pointing pointing = model.getPointing();
     Vector3 lineOfSight = pointing.getLineOfSight();
-    setText(R.id.diagnose_pointing_txt, getDegreeInHour(getRaOfUnitGeocentricVector(lineOfSight)) + ", " + getDecOfUnitGeocentricVector(lineOfSight));
+    setText(R.id.diagnose_pointing_txt, getDegreeInHour(getRaOfUnitGeocentricVector(lineOfSight)) + ", " +
+        getString(R.string.diagnostics_dec_format, getDecOfUnitGeocentricVector(lineOfSight)));
     Date nowTime = model.getTime();
     SimpleDateFormat dateFormatUtc = new SimpleDateFormat("yyyy-MMM-dd HH:mm:ss");
     dateFormatUtc.setTimeZone(TimeZone.getTimeZone("UTC"));
@@ -354,6 +355,6 @@ public class DiagnosticActivity extends androidx.fragment.app.FragmentActivity
     int h = (int) deg / 15;
     int m = (int) ((deg / 15 - h) * 60);
     int s = (int) ((((deg / 15 - h) * 60) - m) * 60);
-    return h + "h " + m + "m " + s + "s ";
+    return getString(R.string.diagnostics_ra_format, h, m, s);
   }
 }

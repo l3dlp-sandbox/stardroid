@@ -4,39 +4,18 @@
     <string name="menu_settings" translation_description="Settings menu item in the options menu">Nastavitve</string>
     <string name="menu_search" translation_description="Search menu item in the options menu">Iskanje</string>
     <string name="cancel" translation_description="Generic cancel button label used in dialogs">Prekliči</string>
-    <string name="set" translation_description="Button label. Set the date to the given value">Nastavi</string>
     <string name="go" translation_description="Button to start navigating the sky map toward a searched object">Pojdi!</string>
     <string name="start_from_now" translation_description="Button in the time travel dialog to start time travelling from the current time">Začni od zdaj</string>
     <string name="other_prefs" translation_description="Preferences category heading for miscellaneous settings">Drugo</string>
-    <string name="location_prefs" translation_description="Preferences category heading for location-related settings">Nastavitve lokacije</string>
     <string name="controls_prefs" translation_description="Preferences category heading for touch control settings">Upravljanje</string>
-    <string name="force_gps_pref" translation_description="Preference label: force GPS use even when network location is available">Vedno uporabi GPS</string>
-    <string name="force_gps_pref_hint" translation_description="this string continues from \'Always use GPS\'">če je omogočeno, tudi če je dostopna omrežna lokacija</string>
-    <string name="no_use_gps_pref" translation_description="Preference label: choose to enter location by hand instead of using GPS or phone location">Nastavi lokacijo ročno</string>
-    <string name="no_use_gps_pref_hint" translation_description="Hint text beneath the \'Set location manually\' preference">Vnesite kraj ali koordinate spodaj</string>
-    <string name="location_placename" translation_description="Label for the place-name text field in manual location settings">Ime kraja</string>
-    <string name="location_placename_hint" translation_description="An example address.  Translators: please pick an address suitable for your country.  If it has an astronomical connection (e.g. the address of an observatory or famous astronomer) then that would be even better.">npr. Observatorij Golovec, Ljubljana</string>
-    <string name="location_lat_pref" translation_description="Label for the latitude input field in manual location settings">Širina</string>
-    <string name="location_long_pref" translation_description="Label for the longitude input field in manual location settings">Dolžina</string>
-    <string name="degrees" translation_description="angular degrees - used for latitude and longitude">Stopinje</string>
-    <!-- tm:omitted name="preferences" reason="identical_to_source" -->
-    <string name="location_offer_to_enable" translation_description="Dialog message asking whether to enable automatic location">Samodejno določanje lokacije je onemogočeno. Ga želite omogočiti?</string>
-    <string name="location_offer_to_enable_gps_title" translation_description="Title of dialog shown when automatic location is disabled">Samodejno določanje lokacije je onemogočeno</string>
     <string name="location_permission_dialog_title" translation_description="Title of the dialog that requests location permission from the user">Lokacija je obvezna</string>
-    <string name="location_permission_dialog_message" translation_description="Body text of the dialog requesting location permission, explaining why the app needs it and what happens without it">
     Sky Map potrebuje vašo približno lokacijo, da prikaže pravilno nočno nebo. Dovolite lahko dovoljenje, ročno vnesete lokacijo ali se odločite kasneje. Če se odločite kasneje, karta ne bo natančna, dokler ni nastavljena vaša lokacija.
     </string>
     <string name="location_permission_grant" translation_description="Button in the location permission dialog to grant location access">Odobri dovoljenje</string>
     <string name="location_permission_enter_manually" translation_description="Button in the location permission dialog to enter location by hand instead of granting permission">Vnesi ročno</string>
     <string name="location_permission_later" translation_description="Button in the location permission dialog to defer the decision">Kasneje</string>
-    <string name="location_warning_permission" translation_description="Warning message shown when location is unavailable because permission was not granted">Lokacija ni dostopna — dovoljenje ni bilo podeljeno.</string>
-    <string name="location_warning_manual" translation_description="Warning message shown when manual location mode is selected but no coordinates have been entered">Lokacija ni nastavljena — prosimo, nastavite v Nastavitvah.</string>
     <string name="location_set_auto" translation_description="Toast message when automatic location is acquired. %1$s is the place name or coordinates">Lokacija nastavljena na %1$s</string>
-    <string name="location_unable_to_geocode" translation_description="Error message when converting a place name to coordinates (geocoding) fails, possibly due to no network">Vaše lokacije ni mogoče dekodirati — morda vaše omrežje ni dostopno?</string>
-    <string name="location_not_found_title" translation_description="dialog box title when location not found">Oprostite</string>
-    <string name="location_not_found" translation_description="dialog message when placename not found">%s ni najden.</string>
     <string name="location_long_lat" translation_description="Formatted display of longitude and latitude. %1$.2f is longitude, %2$.2f is latitude">Dolžina:%1$.2f, Širina:%2$.2f</string>
-    <string name="location_place_found" translation_description="Status message when a place name was successfully looked up. %1$f is latitude, %2$f is longitude">Mesto najdeno. Nastavitev zemljepisne širine %1$f in dolžine %2$f</string>
     <string name="use_magnetic_correction" translation_description="Preference label: apply magnetic declination correction so the compass points to true north instead of magnetic north">Uporabi magnetno korekcijo</string>
     <string name="manual_compass_adjustment_title" translation_description="Preference title: lets the user add a manual degree offset to the compass reading">Dodatna nastavitev kompasa</string>
     <string name="manual_compass_adjustment_summary" translation_description="Summary for the manual compass adjustment preference">Dodatni odmik v stopinjah (+ ali −) dodan odčitku kompasa</string>
@@ -60,7 +39,6 @@
     <string name="show_sky_gradient_preference_title" translation_description="Setting toggle title: whether to show the blue sky gradient during the day">Prikaži gradient neba</string>
     <string name="show_sky_gradient_preference_summary" translation_description="Setting toggle summary for sky gradient: explains what the feature does">Nebo je obarvano modro blizu Sonca in temno na nasprotni strani</string>
     <string name="ecliptic" translation_description="Label for the ecliptic layer — the apparent annual path of the Sun across the sky">Ekliptika</string>
-    <string name="malformed_loc_error" translation_description="Error message when a non-numeric value is entered for latitude or longitude">Nastavitev za zemljepisno širino ali dolžino ni številka.</string>
     <string name="dialog_accept" translation_description="accepting the licence agreement">Sprejmi</string>
     <string name="dialog_decline" translation_description="declining the licence agreement">Ne, hvala</string>
     <string name="dialog_ok_button" translation_description="Generic OK/confirm button label for dialogs">V redu</string>
