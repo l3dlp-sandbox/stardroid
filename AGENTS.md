@@ -97,6 +97,13 @@ Follow the [Google Java Style Guide](https://google.github.io/styleguide/javagui
 - 100 character line wrap
 - Do **not** prefix member variables with `m` (unlike common Android convention)
 - Use Java 17 toolchain features
+## Threading and Concurrency
+
+- **No Raw Threads:** Never use `Thread { ... }.start()` or `new Thread()`. Raw threads are inefficient and difficult to manage/cancel.
+- **Background Executor:** For background tasks (e.g. geocoding, I/O), inject the shared `ScheduledExecutorService` provided by `ApplicationModule`.
+- **UI Thread:** Use `Handler(Looper.getMainLooper())` or `activity.runOnUiThread` (in fragments) to post results back to the UI thread.
+- **Coroutines:** While preferred for new Kotlin code, ensure they are integrated with the existing Hilt-managed scopes if used.
+
 
 ### Strings
 Remember to properly escape any text added as Android resource strings (e.g. ' must be escaped

@@ -4,39 +4,17 @@
     <string name="menu_settings" translation_description="Settings menu item in the options menu">Nastavenia</string>
     <string name="menu_search" translation_description="Search menu item in the options menu">Hľadať</string>
     <string name="cancel" translation_description="Generic cancel button label used in dialogs">Zrušiť</string>
-    <string name="set" translation_description="Button label. Set the date to the given value">Nastaviť</string>
     <string name="go" translation_description="Button to start navigating the sky map toward a searched object">Choď!</string>
     <string name="start_from_now" translation_description="Button in the time travel dialog to start time travelling from the current time">Spustiť od teraz</string>
     <string name="other_prefs" translation_description="Preferences category heading for miscellaneous settings">Ostatné</string>
-    <string name="location_prefs" translation_description="Preferences category heading for location-related settings">Nastavenie polohy</string>
     <string name="controls_prefs" translation_description="Preferences category heading for touch control settings">Ovládanie</string>
-    <string name="force_gps_pref" translation_description="Preference label: force GPS use even when network location is available">Vždy používať GPS</string>
-    <string name="force_gps_pref_hint" translation_description="this string continues from \'Always use GPS\'">ak je povolené, aj keď je dostupná poloha podľa siete</string>
-    <string name="no_use_gps_pref" translation_description="Preference label: choose to enter location by hand instead of using GPS or phone location">Nastaviť polohu manuálne</string>
-    <string name="no_use_gps_pref_hint" translation_description="Hint text beneath the \'Set location manually\' preference">Nižšie zadajte miesto alebo šírku/dĺžku</string>
-    <string name="location_placename" translation_description="Label for the place-name text field in manual location settings">Názov miesta</string>
-    <string name="location_placename_hint" translation_description="An example address.  Translators: please pick an address suitable for your country.  If it has an astronomical connection (e.g. the address of an observatory or famous astronomer) then that would be even better.">napr. Nám. SNP, Bratislava</string>
-    <string name="location_lat_pref" translation_description="Label for the latitude input field in manual location settings">Zemepisná šírka</string>
-    <string name="location_long_pref" translation_description="Label for the longitude input field in manual location settings">Zemepisná dĺžka</string>
-    <string name="degrees" translation_description="angular degrees - used for latitude and longitude">Stupne</string>
-    <string name="preferences" translation_description="Provider-name label used internally when a location is set from preferences (not shown directly to the user as a UI label - does not require a translation)">predvoľby</string>
-    <string name="location_offer_to_enable" translation_description="Dialog message asking whether to enable automatic location">Automatické určenie polohy je zakázané. Chcete ho povoliť?</string>
-    <string name="location_offer_to_enable_gps_title" translation_description="Title of dialog shown when automatic location is disabled">Automatické určenie polohy zakázané</string>
     <string name="location_permission_dialog_title" translation_description="Title of the dialog that requests location permission from the user">Vyžaduje sa poloha</string>
-    <string name="location_permission_dialog_message" translation_description="Body text of the dialog requesting location permission, explaining why the app needs it and what happens without it">
-    Sky Map potrebuje vašu približnú polohu, aby zobrazil správnu nočnú oblohu. Môžete udeliť povolenie, zadať svoju polohu ručne alebo sa rozhodnúť neskôr. Ak sa rozhodnete neskôr, mapa nebude presná, kým nebude nastavená vaša poloha.
-    </string>
+    <string name="location_permission_dialog_message">Sky Map potrebuje vašu približnú polohu, aby zobrazil správnu nočnú oblohu. Môžete udeliť povolenie, zadať svoju polohu ručne alebo sa rozhodnúť neskôr. Ak sa rozhodnete neskôr, mapa nebude presná, kým nebude nastavená vaša poloha.</string>
     <string name="location_permission_grant" translation_description="Button in the location permission dialog to grant location access">Udeliť povolenie</string>
     <string name="location_permission_enter_manually" translation_description="Button in the location permission dialog to enter location by hand instead of granting permission">Zadať ručne</string>
     <string name="location_permission_later" translation_description="Button in the location permission dialog to defer the decision">Neskôr</string>
-    <string name="location_warning_permission" translation_description="Warning message shown when location is unavailable because permission was not granted">Poloha nie je dostupná — povolenie nebolo udelené.</string>
-    <string name="location_warning_manual" translation_description="Warning message shown when manual location mode is selected but no coordinates have been entered">Poloha nie je nastavená — nakonfigurujte ju v Nastaveniach.</string>
     <string name="location_set_auto" translation_description="Toast message when automatic location is acquired. %1$s is the place name or coordinates">Poloha nastavená na %1$s</string>
-    <string name="location_unable_to_geocode" translation_description="Error message when converting a place name to coordinates (geocoding) fails, possibly due to no network">Nie je možné zistiť vašu polohu – sieť možno nie je dostupná</string>
-    <string name="location_not_found_title" translation_description="dialog box title when location not found">Nenájdené</string>
-    <string name="location_not_found" translation_description="dialog message when placename not found">Nedá sa nájsť %s</string>
     <string name="location_long_lat" translation_description="Formatted display of longitude and latitude. %1$.2f is longitude, %2$.2f is latitude">Zemepisná dĺžka:%1$.2f, Zemepisná šírka:%2$.2f</string>
-    <string name="location_place_found" translation_description="Status message when a place name was successfully looked up. %1$f is latitude, %2$f is longitude">Miesto nájdené. Nastavenie šírky %1$f a dĺžky %2$f</string>
     <string name="use_magnetic_correction" translation_description="Preference label: apply magnetic declination correction so the compass points to true north instead of magnetic north">Použiť magnetickú korekciu</string>
     <string name="manual_compass_adjustment_title" translation_description="Preference title: lets the user add a manual degree offset to the compass reading">Dodatočné nastavenie kompasu</string>
     <string name="manual_compass_adjustment_summary" translation_description="Summary for the manual compass adjustment preference">Dodatočný posun v stupňoch (+ alebo −) pridaný k čítaniu kompasu</string>
@@ -60,7 +38,6 @@
     <string name="show_sky_gradient_preference_title" translation_description="Setting toggle title: whether to show the blue sky gradient during the day">Zobraziť gradient oblohy</string>
     <string name="show_sky_gradient_preference_summary" translation_description="Setting toggle summary for sky gradient: explains what the feature does">Tieňuje oblohu modrou blízko Slnka a tmavou na opačnej strane</string>
     <string name="ecliptic" translation_description="Label for the ecliptic layer — the apparent annual path of the Sun across the sky">Ekliptika</string>
-    <string name="malformed_loc_error" translation_description="Error message when a non-numeric value is entered for latitude or longitude">Nastavená šírka alebo dĺžka nie je číslo.</string>
     <string name="dialog_accept" translation_description="accepting the licence agreement">Prijať</string>
     <string name="dialog_decline" translation_description="declining the licence agreement">Odmietnuť</string>
     <!-- tm:omitted name="dialog_ok_button" reason="identical_to_source" -->

@@ -4,37 +4,16 @@
     <!-- tm:omitted name="menu_settings" reason="identical_to_source" -->
     <!-- tm:omitted name="menu_search" reason="identical_to_source" -->
     <!-- tm:omitted name="cancel" reason="identical_to_source" -->
-    <!-- tm:omitted name="set" reason="identical_to_source" -->
     <!-- tm:omitted name="go" reason="identical_to_source" -->
     <!-- tm:omitted name="start_from_now" reason="identical_to_source" -->
     <!-- tm:omitted name="other_prefs" reason="identical_to_source" -->
-    <!-- tm:omitted name="location_prefs" reason="identical_to_source" -->
     <!-- tm:omitted name="controls_prefs" reason="identical_to_source" -->
-    <!-- tm:omitted name="force_gps_pref" reason="identical_to_source" -->
-    <!-- tm:omitted name="force_gps_pref_hint" reason="identical_to_source" -->
-    <!-- tm:omitted name="no_use_gps_pref" reason="identical_to_source" -->
-    <!-- tm:omitted name="no_use_gps_pref_hint" reason="identical_to_source" -->
-    <!-- tm:omitted name="location_placename" reason="identical_to_source" -->
-    <string name="location_placename_hint" translation_description="An example address.  Translators: please pick an address suitable for your country.  If it has an astronomical connection (e.g. the address of an observatory or famous astronomer) then that would be even better.">e.g. The Royal Observatory of Edinburgh</string>
-    <!-- tm:omitted name="location_lat_pref" reason="identical_to_source" -->
-    <!-- tm:omitted name="location_long_pref" reason="identical_to_source" -->
-    <!-- tm:omitted name="degrees" reason="identical_to_source" -->
-    <!-- tm:omitted name="preferences" reason="identical_to_source" -->
-    <!-- tm:omitted name="location_offer_to_enable" reason="identical_to_source" -->
-    <!-- tm:omitted name="location_offer_to_enable_gps_title" reason="identical_to_source" -->
     <!-- tm:omitted name="location_permission_dialog_title" reason="identical_to_source" -->
-    <!-- tm:omitted name="location_permission_dialog_message" reason="identical_to_source" -->
     <!-- tm:omitted name="location_permission_grant" reason="identical_to_source" -->
     <!-- tm:omitted name="location_permission_enter_manually" reason="identical_to_source" -->
     <!-- tm:omitted name="location_permission_later" reason="identical_to_source" -->
-    <!-- tm:omitted name="location_warning_permission" reason="identical_to_source" -->
-    <!-- tm:omitted name="location_warning_manual" reason="identical_to_source" -->
     <!-- tm:omitted name="location_set_auto" reason="identical_to_source" -->
-    <!-- tm:omitted name="location_unable_to_geocode" reason="identical_to_source" -->
-    <!-- tm:omitted name="location_not_found_title" reason="identical_to_source" -->
-    <!-- tm:omitted name="location_not_found" reason="identical_to_source" -->
     <!-- tm:omitted name="location_long_lat" reason="identical_to_source" -->
-    <!-- tm:omitted name="location_place_found" reason="identical_to_source" -->
     <!-- tm:omitted name="use_magnetic_correction" reason="identical_to_source" -->
     <!-- tm:omitted name="manual_compass_adjustment_title" reason="identical_to_source" -->
     <!-- tm:omitted name="manual_compass_adjustment_summary" reason="identical_to_source" -->
@@ -58,7 +37,6 @@
     <!-- tm:omitted name="show_sky_gradient_preference_title" reason="identical_to_source" -->
     <!-- tm:omitted name="show_sky_gradient_preference_summary" reason="identical_to_source" -->
     <!-- tm:omitted name="ecliptic" reason="identical_to_source" -->
-    <!-- tm:omitted name="malformed_loc_error" reason="identical_to_source" -->
     <!-- tm:omitted name="dialog_accept" reason="identical_to_source" -->
     <!-- tm:omitted name="dialog_decline" reason="identical_to_source" -->
     <!-- tm:omitted name="dialog_ok_button" reason="identical_to_source" -->

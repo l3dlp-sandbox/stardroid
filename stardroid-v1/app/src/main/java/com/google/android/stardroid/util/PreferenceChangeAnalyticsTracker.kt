@@ -17,6 +17,7 @@ import android.content.SharedPreferences
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener
 import android.os.Bundle
 import android.util.Log
+import com.google.android.stardroid.ApplicationConstants
 import com.google.android.stardroid.util.MiscUtil.getTag
 import javax.inject.Inject
 
@@ -28,7 +29,10 @@ import javax.inject.Inject
 class PreferenceChangeAnalyticsTracker @Inject internal constructor(private val analytics: Analytics) :
   OnSharedPreferenceChangeListener {
   // Keys whose values may contain user-entered location data.
-  private val blacklist: Set<String> = setOf("location", "latitude", "longitude")
+  private val blacklist: Set<String> = setOf(
+    ApplicationConstants.LATITUDE_PREF_KEY,
+    ApplicationConstants.LONGITUDE_PREF_KEY
+  )
 
   private fun trackPreferenceChange(sharedPreferences: SharedPreferences, key: String?) {
     Log.d(TAG, "Logging pref change $key")

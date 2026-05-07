@@ -4,26 +4,8 @@
     <string name="menu_settings" translation_description="Settings menu item in the options menu">Настройки</string>
     <string name="menu_search" translation_description="Search menu item in the options menu">Поиск</string>
     <string name="cancel" translation_description="Generic cancel button label used in dialogs">Отмена</string>
-    <string name="set" translation_description="Button label. Set the date to the given value">Настройка</string>
     <string name="go" translation_description="Button to start navigating the sky map toward a searched object">Вперед!</string>
-    <string name="location_prefs" translation_description="Preferences category heading for location-related settings">Параметры местоположения</string>
-    <string name="force_gps_pref" translation_description="Preference label: force GPS use even when network location is available">Всегда исп. GPS</string>
-    <string name="force_gps_pref_hint" translation_description="this string continues from \'Always use GPS\'">если вкл., даже при сетевом опр. м/п</string>
-    <string name="no_use_gps_pref" translation_description="Preference label: choose to enter location by hand instead of using GPS or phone location">Задать м/п вручную</string>
-    <string name="no_use_gps_pref_hint" translation_description="Hint text beneath the \'Set location manually\' preference">Введите назв. или шир./длг.</string>
-    <string name="location_placename" translation_description="Label for the place-name text field in manual location settings">Название места</string>
-    <string name="location_placename_hint" translation_description="An example address.  Translators: please pick an address suitable for your country.  If it has an astronomical connection (e.g. the address of an observatory or famous astronomer) then that would be even better.">например РФ, Санкт-Петербург, пл. Островского, д. 1/3</string>
-    <string name="location_lat_pref" translation_description="Label for the latitude input field in manual location settings">Широта</string>
-    <string name="location_long_pref" translation_description="Label for the longitude input field in manual location settings">Долгота</string>
-    <string name="degrees" translation_description="angular degrees - used for latitude and longitude">Градусы</string>
-    <string name="preferences" translation_description="Provider-name label used internally when a location is set from preferences (not shown directly to the user as a UI label - does not require a translation)">настройки</string>
-    <string name="location_offer_to_enable" translation_description="Dialog message asking whether to enable automatic location">Автоопределение местоположения откл. Включить?</string>
-    <string name="location_offer_to_enable_gps_title" translation_description="Title of dialog shown when automatic location is disabled">Автоопред. м/п откл.</string>
-    <string name="location_unable_to_geocode" translation_description="Error message when converting a place name to coordinates (geocoding) fails, possibly due to no network">Невозможно определить местоположение – возможно, недоступна сеть.</string>
-    <string name="location_not_found_title" translation_description="dialog box title when location not found">Извините</string>
-    <string name="location_not_found" translation_description="dialog message when placename not found">Не найдено: %s.</string>
     <string name="location_long_lat" translation_description="Formatted display of longitude and latitude. %1$.2f is longitude, %2$.2f is latitude">Долгота:%1$s, широта:%2$s</string>
-    <string name="location_place_found" translation_description="Status message when a place name was successfully looked up. %1$f is latitude, %2$f is longitude">Место найдено. Уст. широта %1$f и долгота %2$f</string>
     <string name="use_magnetic_correction" translation_description="Preference label: apply magnetic declination correction so the compass points to true north instead of magnetic north">Исп. поправку на магн. склон.</string>
     <string name="show_stars_pref" translation_description="Label for the stars layer on the sky map (shows in the search results)">Звезды</string>
     <string name="show_constellations_pref" translation_description="Label for the constellation lines and labels layer (shows in the search results)">Созвездия</string>
@@ -35,7 +17,6 @@
     <string name="show_meteors_pref" translation_description="Label for the meteor shower layer (shows in the search results)">Метеоритные дожди</string>
     <string name="sensor_prefs" translation_description="Preferences category heading for sensor settings, intended for advanced/expert users">Настройки матрицы</string>
     <string name="ecliptic" translation_description="Label for the ecliptic layer — the apparent annual path of the Sun across the sky">эклиптика</string>
-    <string name="malformed_loc_error" translation_description="Error message when a non-numeric value is entered for latitude or longitude">Значение широты или долготы не явл. числом.</string>
     <string name="dialog_accept" translation_description="accepting the licence agreement">Принять</string>
     <string name="dialog_decline" translation_description="declining the licence agreement">Нет, спасибо</string>
     <string name="menu_help" translation_description="menu item to show \'Help\' box">Справка</string>

@@ -4,39 +4,17 @@
     <string name="menu_settings" translation_description="Settings menu item in the options menu">Paramètres</string>
     <string name="menu_search" translation_description="Search menu item in the options menu">Rechercher</string>
     <string name="cancel" translation_description="Generic cancel button label used in dialogs">Annuler</string>
-    <string name="set" translation_description="Button label. Set the date to the given value">Définir</string>
     <string name="go" translation_description="Button to start navigating the sky map toward a searched object">Atteindre</string>
     <string name="start_from_now" translation_description="Button in the time travel dialog to start time travelling from the current time">Partir de maintenant</string>
     <string name="other_prefs" translation_description="Preferences category heading for miscellaneous settings">Autres</string>
-    <string name="location_prefs" translation_description="Preferences category heading for location-related settings">Paramètres de position</string>
     <string name="controls_prefs" translation_description="Preferences category heading for touch control settings">Commandes</string>
-    <string name="force_gps_pref" translation_description="Preference label: force GPS use even when network location is available">Utiliser le GPS</string>
-    <string name="force_gps_pref_hint" translation_description="this string continues from \'Always use GPS\'">Même si la géolocalisation est activée.</string>
-    <string name="no_use_gps_pref" translation_description="Preference label: choose to enter location by hand instead of using GPS or phone location">Position manuelle</string>
-    <string name="no_use_gps_pref_hint" translation_description="Hint text beneath the \'Set location manually\' preference">Précisez un lieu ou une lat/long.</string>
-    <string name="location_placename" translation_description="Label for the place-name text field in manual location settings">Nom de lieu</string>
-    <string name="location_placename_hint" translation_description="An example address.  Translators: please pick an address suitable for your country.  If it has an astronomical connection (e.g. the address of an observatory or famous astronomer) then that would be even better.">Exemple : 11 rue de l\'Université, Strasbourg</string>
-    <!-- tm:omitted name="location_lat_pref" reason="identical_to_source" -->
-    <!-- tm:omitted name="location_long_pref" reason="identical_to_source" -->
-    <string name="degrees" translation_description="angular degrees - used for latitude and longitude">Degrés</string>
-    <string name="preferences" translation_description="Provider-name label used internally when a location is set from preferences (not shown directly to the user as a UI label - does not require a translation)">préférences</string>
-    <string name="location_offer_to_enable" translation_description="Dialog message asking whether to enable automatic location">Position auto désactivée. Voulez-vous l\'activer ?</string>
-    <string name="location_offer_to_enable_gps_title" translation_description="Title of dialog shown when automatic location is disabled">Position auto désactivée</string>
     <string name="location_permission_dialog_title" translation_description="Title of the dialog that requests location permission from the user">Localisation requise</string>
-    <string name="location_permission_dialog_message" translation_description="Body text of the dialog requesting location permission, explaining why the app needs it and what happens without it">
-    Sky Map a besoin de votre position approximative pour afficher le ciel nocturne correct. Vous pouvez accorder l\'autorisation, saisir votre position manuellement, ou décider plus tard. Si vous décidez plus tard, la carte ne sera pas précise tant que votre position n\'aura pas été définie.
-    </string>
+    <string name="location_permission_dialog_message">Sky Map a besoin de votre position approximative pour afficher le ciel nocturne correct. Vous pouvez accorder l\'autorisation, saisir votre position manuellement, ou décider plus tard. Si vous décidez plus tard, la carte ne sera pas précise tant que votre position n\'aura pas été définie.</string>
     <string name="location_permission_grant" translation_description="Button in the location permission dialog to grant location access">Accorder l\'autorisation</string>
     <string name="location_permission_enter_manually" translation_description="Button in the location permission dialog to enter location by hand instead of granting permission">Saisir manuellement</string>
     <string name="location_permission_later" translation_description="Button in the location permission dialog to defer the decision">Plus tard</string>
-    <string name="location_warning_permission" translation_description="Warning message shown when location is unavailable because permission was not granted">Localisation indisponible — autorisation non accordée.</string>
-    <string name="location_warning_manual" translation_description="Warning message shown when manual location mode is selected but no coordinates have been entered">Localisation non définie — veuillez configurer dans les paramètres.</string>
     <string name="location_set_auto" translation_description="Toast message when automatic location is acquired. %1$s is the place name or coordinates">Localisation définie sur %1$s</string>
-    <string name="location_unable_to_geocode" translation_description="Error message when converting a place name to coordinates (geocoding) fails, possibly due to no network">Impossible de déterminer votre position. Votre réseau est-il accessible ?</string>
-    <string name="location_not_found_title" translation_description="dialog box title when location not found">Désolé</string>
-    <string name="location_not_found" translation_description="dialog message when placename not found">%s introuvable</string>
     <string name="location_long_lat" translation_description="Formatted display of longitude and latitude. %1$.2f is longitude, %2$.2f is latitude">Longitude: %1$.2f, latitude: %2$.2f</string>
-    <string name="location_place_found" translation_description="Status message when a place name was successfully looked up. %1$f is latitude, %2$f is longitude">Lieu trouvé. Définir latitude %1$f et longitude %2$f</string>
     <string name="use_magnetic_correction" translation_description="Preference label: apply magnetic declination correction so the compass points to true north instead of magnetic north">Correction magnétique</string>
     <string name="manual_compass_adjustment_title" translation_description="Preference title: lets the user add a manual degree offset to the compass reading">Ajustement supplémentaire de la boussole</string>
     <string name="manual_compass_adjustment_summary" translation_description="Summary for the manual compass adjustment preference">Décalage supplémentaire en degrés (+ ou −) appliqué à la lecture de la boussole</string>
@@ -60,7 +38,6 @@
     <string name="show_sky_gradient_preference_title" translation_description="Setting toggle title: whether to show the blue sky gradient during the day">Afficher le dégradé du ciel</string>
     <string name="show_sky_gradient_preference_summary" translation_description="Setting toggle summary for sky gradient: explains what the feature does">Assombrit le ciel en bleu près du Soleil et foncé du côté opposé</string>
     <string name="ecliptic" translation_description="Label for the ecliptic layer — the apparent annual path of the Sun across the sky">Écliptique</string>
-    <string name="malformed_loc_error" translation_description="Error message when a non-numeric value is entered for latitude or longitude">Indiquez un nombre pour la latitude/longitude.</string>
     <string name="dialog_accept" translation_description="accepting the licence agreement">Accepter</string>
     <string name="dialog_decline" translation_description="declining the licence agreement">Non, merci</string>
     <!-- tm:omitted name="dialog_ok_button" reason="identical_to_source" -->

@@ -22,6 +22,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import java.util.concurrent.ScheduledExecutorService
 import java.util.concurrent.ScheduledThreadPoolExecutor
 import javax.inject.Named
 import javax.inject.Singleton
@@ -73,7 +74,12 @@ class ApplicationModule {
 
   @Provides
   @Singleton
-  fun provideBackgroundExecutor() = ScheduledThreadPoolExecutor(1)
+  fun provideBackgroundExecutor(): ScheduledExecutorService {
+    val cpuCount = Runtime.getRuntime().availableProcessors()
+    // I/O-Bound (Network calls, Database, File writing)
+    val corePoolSize = cpuCount * 2
+    return ScheduledThreadPoolExecutor(corePoolSize)
+  }
 
   @Provides
   @Singleton

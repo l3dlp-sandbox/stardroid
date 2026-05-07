@@ -13,21 +13,13 @@
 // limitations under the License.
 package com.google.android.stardroid.activities;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
 import android.content.SharedPreferences;
-import android.location.Address;
-import android.location.Geocoder;
 import android.os.Bundle;
-import android.preference.EditTextPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
-import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import com.google.android.stardroid.ApplicationConstants;
 import com.google.android.stardroid.R;
@@ -37,9 +29,6 @@ import com.google.android.stardroid.activities.util.ActivityLightLevelManager;
 import com.google.android.stardroid.activities.util.EdgeToEdgeFixer;
 import com.google.android.stardroid.util.Analytics;
 import com.google.android.stardroid.util.MiscUtil;
-
-import java.io.IOException;
-import java.util.List;
 
 import dagger.hilt.EntryPoint;
 import dagger.hilt.InstallIn;
@@ -73,16 +62,10 @@ public class EditSettingsActivity extends PreferenceActivity
       addPreferencesFromResource(R.xml.preference_screen);
     }
   }
-  /**
-   * These must match the keys in the preference_screen.xml file.
-   */
-  private static final String LONGITUDE = "longitude";
-  private static final String LATITUDE = "latitude";
-  private static final String LOCATION = "location";
+
   private static final String TAG = MiscUtil.getTag(EditSettingsActivity.class);
 
   private boolean nightMode = false;
-  private Geocoder geocoder;
   private ActivityLightLevelManager activityLightLevelManager;
   private Analytics analytics;
   private SharedPreferences sharedPreferences;
@@ -100,7 +83,6 @@ public class EditSettingsActivity extends PreferenceActivity
         getWindow(), sharedPreferences, this);
     activityLightLevelManager = new ActivityLightLevelManager(lightLevelChanger, sharedPreferences);
 
-    geocoder = new Geocoder(this);
     preferenceFragment = new MyPreferenceFragment();
     preferenceFragment.setParentActivity(this);
     getFragmentManager().beginTransaction().replace(android.R.id.content,
@@ -115,33 +97,6 @@ public class EditSettingsActivity extends PreferenceActivity
     super.onStart();
     View rootView = findViewById(android.R.id.content);
     EdgeToEdgeFixer.applyTopPaddingForActionBar(this, rootView);
-
-    final Preference locationPreference = preferenceFragment.findPreference(LOCATION);
-    Preference latitudePreference = preferenceFragment.findPreference(LATITUDE);
-    Preference longitudePreference = preferenceFragment.findPreference(LONGITUDE);
-    locationPreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-
-      public boolean onPreferenceChange(Preference preference, Object newValue) {
-        Log.d(TAG, "Place to be updated to " + newValue);
-        return setLatLongFromPlace(newValue.toString());
-      }
-    });
-
-    latitudePreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-
-      public boolean onPreferenceChange(Preference preference, Object newValue) {
-        ((EditTextPreference) locationPreference).setText("");
-        return true;
-      }
-    });
-
-    longitudePreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-
-      public boolean onPreferenceChange(Preference preference, Object newValue) {
-        ((EditTextPreference) locationPreference).setText("");
-        return true;
-      }
-    });
 
     Preference gyroPreference = preferenceFragment.findPreference(
         ApplicationConstants.SHARED_PREFERENCE_DISABLE_GYRO);
@@ -204,51 +159,5 @@ public class EditSettingsActivity extends PreferenceActivity
     // rows using system-managed views that cannot be reliably recoloured without a full
     // custom preference renderer.
     NightModeHelper.applyActionBarNightMode(getActionBar(), this, nightMode);
-  }
-
-  protected boolean setLatLongFromPlace(String place) {
-    // Geocoding is a blocking network call - run it off the main thread.
-    new Thread(() -> {
-      List<Address> addresses;
-      try {
-        addresses = geocoder.getFromLocationName(place, 1);
-      } catch (IOException e) {
-        runOnUiThread(() -> { if (!isFinishing()) Toast.makeText(this,
-            getString(R.string.location_unable_to_geocode), Toast.LENGTH_SHORT).show(); });
-        return;
-      }
-      if (addresses == null || addresses.isEmpty()) {
-        runOnUiThread(() -> { if (!isFinishing()) showNotFoundDialog(place); });
-        return;
-      }
-      // TODO(johntaylor) let the user choose, but for now just pick the first.
-      Address first = addresses.get(0);
-      runOnUiThread(() -> { if (!isFinishing()) setLatLong(first.getLatitude(), first.getLongitude()); });
-    }).start();
-    // Return false: the place-name field itself is not persisted; setLatLong() saves lat/long.
-    return false;
-  }
-
-  private void setLatLong(double latitude, double longitude) {
-    EditTextPreference latPreference = (EditTextPreference) preferenceFragment.findPreference(LATITUDE);
-    EditTextPreference longPreference = (EditTextPreference) preferenceFragment.findPreference(LONGITUDE);
-    latPreference.setText(Double.toString(latitude));
-    longPreference.setText(Double.toString(longitude));
-    String message = String.format(getString(R.string.location_place_found), latitude, longitude);
-    Log.d(TAG, message);
-    Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
-  }
-
-  private void showNotFoundDialog(String place) {
-    String message = String.format(getString(R.string.location_not_found), place);
-    AlertDialog.Builder dialog = new AlertDialog.Builder(this)
-        .setTitle(R.string.location_not_found_title)
-        .setMessage(message)
-        .setPositiveButton(android.R.string.ok, new OnClickListener() {
-          public void onClick(DialogInterface dialog, int which) {
-            dialog.dismiss();
-          }
-        });
-    dialog.show();
   }
 }

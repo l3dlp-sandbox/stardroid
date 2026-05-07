@@ -4,39 +4,17 @@
     <string name="menu_settings" translation_description="Settings menu item in the options menu">सेटिंग्स</string>
     <string name="menu_search" translation_description="Search menu item in the options menu">खोज</string>
     <string name="cancel" translation_description="Generic cancel button label used in dialogs">रद्द करें</string>
-    <string name="set" translation_description="Button label. Set the date to the given value">सेट करें</string>
     <string name="go" translation_description="Button to start navigating the sky map toward a searched object">जाएं!</string>
     <string name="start_from_now" translation_description="Button in the time travel dialog to start time travelling from the current time">अभी से शुरू करें</string>
     <string name="other_prefs" translation_description="Preferences category heading for miscellaneous settings">अन्य</string>
-    <string name="location_prefs" translation_description="Preferences category heading for location-related settings">स्थान सेटिंग्स</string>
     <string name="controls_prefs" translation_description="Preferences category heading for touch control settings">नियंत्रण</string>
-    <string name="force_gps_pref" translation_description="Preference label: force GPS use even when network location is available">हमेशा GPS का उपयोग करें</string>
-    <string name="force_gps_pref_hint" translation_description="this string continues from \'Always use GPS\'">यदि सक्षम है, तो नेटवर्क स्थान उपलब्ध होने पर भी</string>
-    <string name="no_use_gps_pref" translation_description="Preference label: choose to enter location by hand instead of using GPS or phone location">स्थान को मैन्युअल रूप से सेट करें</string>
-    <string name="no_use_gps_pref_hint" translation_description="Hint text beneath the \'Set location manually\' preference">नीचे कोई स्थान या अक्षांश/देशांतर दर्ज करें</string>
-    <string name="location_placename" translation_description="Label for the place-name text field in manual location settings">स्थान का नाम</string>
-    <string name="location_placename_hint" translation_description="An example address.  Translators: please pick an address suitable for your country.  If it has an astronomical connection (e.g. the address of an observatory or famous astronomer) then that would be even better.">उदा. 1400 वेस्ट मार्स हिल रोड, फ्लैगस्टाफ, एरिजोना।</string>
-    <string name="location_lat_pref" translation_description="Label for the latitude input field in manual location settings">अक्षांश</string>
-    <string name="location_long_pref" translation_description="Label for the longitude input field in manual location settings">देशांतर</string>
-    <string name="degrees" translation_description="angular degrees - used for latitude and longitude">डिग्री</string>
-    <!-- tm:omitted name="preferences" reason="identical_to_source" -->
-    <string name="location_offer_to_enable" translation_description="Dialog message asking whether to enable automatic location">ऑटो-स्थान अक्षम है। क्या आप इसे सक्षम करना चाहते हैं?</string>
-    <string name="location_offer_to_enable_gps_title" translation_description="Title of dialog shown when automatic location is disabled">ऑटो-स्थान अक्षम</string>
     <string name="location_permission_dialog_title" translation_description="Title of the dialog that requests location permission from the user">स्थान आवश्यक है</string>
-    <string name="location_permission_dialog_message" translation_description="Body text of the dialog requesting location permission, explaining why the app needs it and what happens without it">
-    Sky Map को सही रात के आकाश को दिखाने के लिए आपके अनुमानित स्थान की आवश्यकता है। आप अनुमति दे सकते हैं, अपना स्थान मैन्युअल रूप से दर्ज कर सकते हैं, या बाद में निर्णय ले सकते हैं। यदि आप बाद में निर्णय लेते हैं, तो आपका स्थान सेट होने तक नक्शा सटीक नहीं होगा।
-    </string>
+    <string name="location_permission_dialog_message">Sky Map को सही रात के आकाश को दिखाने के लिए आपके अनुमानित स्थान की आवश्यकता है। आप अनुमति दे सकते हैं, अपना स्थान मैन्युअल रूप से दर्ज कर सकते हैं, या बाद में निर्णय ले सकते हैं। यदि आप बाद में निर्णय लेते हैं, तो आपका स्थान सेट होने तक नक्शा सटीक नहीं होगा।</string>
     <string name="location_permission_grant" translation_description="Button in the location permission dialog to grant location access">अनुमति दें</string>
     <string name="location_permission_enter_manually" translation_description="Button in the location permission dialog to enter location by hand instead of granting permission">मैन्युअल रूप से दर्ज करें</string>
     <string name="location_permission_later" translation_description="Button in the location permission dialog to defer the decision">बाद में</string>
-    <string name="location_warning_permission" translation_description="Warning message shown when location is unavailable because permission was not granted">स्थान उपलब्ध नहीं — अनुमति प्रदान नहीं की गई।</string>
-    <string name="location_warning_manual" translation_description="Warning message shown when manual location mode is selected but no coordinates have been entered">स्थान सेट नहीं है — कृपया सेटिंग्स में कॉन्फ़िगर करें।</string>
     <string name="location_set_auto" translation_description="Toast message when automatic location is acquired. %1$s is the place name or coordinates">स्थान %1$s पर सेट किया गया</string>
-    <string name="location_unable_to_geocode" translation_description="Error message when converting a place name to coordinates (geocoding) fails, possibly due to no network">आपके स्थान को डिकोड नहीं कर सके - शायद आपका नेटवर्क उपलब्ध नहीं है?</string>
-    <string name="location_not_found_title" translation_description="dialog box title when location not found">खेद है</string>
-    <string name="location_not_found" translation_description="dialog message when placename not found">%s नहीं मिला।</string>
     <string name="location_long_lat" translation_description="Formatted display of longitude and latitude. %1$.2f is longitude, %2$.2f is latitude">देशांतर:%1$.2f, अक्षांश:%2$.2f</string>
-    <string name="location_place_found" translation_description="Status message when a place name was successfully looked up. %1$f is latitude, %2$f is longitude">स्थान मिल गया। अक्षांश %1$f और देशांतर %2$f सेट किया जा रहा है</string>
     <string name="use_magnetic_correction" translation_description="Preference label: apply magnetic declination correction so the compass points to true north instead of magnetic north">चुंबकीय सुधार का उपयोग करें</string>
     <string name="manual_compass_adjustment_title" translation_description="Preference title: lets the user add a manual degree offset to the compass reading">अतिरिक्त कम्पास समायोजन</string>
     <string name="manual_compass_adjustment_summary" translation_description="Summary for the manual compass adjustment preference">कम्पास रीडिंग में जोड़ा गया अतिरिक्त ऑफ़सेट डिग्री में (+ या −)</string>
@@ -60,7 +38,6 @@
     <string name="show_sky_gradient_preference_title" translation_description="Setting toggle title: whether to show the blue sky gradient during the day">आकाश ग्रेडिएंट दिखाएं</string>
     <string name="show_sky_gradient_preference_summary" translation_description="Setting toggle summary for sky gradient: explains what the feature does">सूर्य के पास आकाश को नीला और विपरीत ओर गहरा करता है</string>
     <string name="ecliptic" translation_description="Label for the ecliptic layer — the apparent annual path of the Sun across the sky">क्रांतिवृत्त</string>
-    <string name="malformed_loc_error" translation_description="Error message when a non-numeric value is entered for latitude or longitude">अक्षांश या देशांतर सेटिंग एक संख्या नहीं है।</string>
     <string name="dialog_accept" translation_description="accepting the licence agreement">स्वीकार करें</string>
     <string name="dialog_decline" translation_description="declining the licence agreement">नहीं, धन्यवाद</string>
     <string name="dialog_ok_button" translation_description="Generic OK/confirm button label for dialogs">ठीक है</string>
