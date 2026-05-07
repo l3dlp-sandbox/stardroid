@@ -193,8 +193,7 @@ public class DiagnosticActivity extends androidx.fragment.app.FragmentActivity
     setText(R.id.diagnose_gps_status_txt, gpsStatusMessage);
     LocationState locationState = locationController.currentState();
     String locationMessage;
-    if (locationState instanceof LocationState.Confirmed) {
-      LocationState.Confirmed confirmed = (LocationState.Confirmed) locationState;
+    if (locationState instanceof LocationState.Confirmed confirmed) {
       locationMessage = getString(R.string.location_diagnostic_format,
           confirmed.getLocation().getLatitude(), confirmed.getLocation().getLongitude(),
           confirmed.getSource().name().toLowerCase());
