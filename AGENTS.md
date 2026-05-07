@@ -31,6 +31,36 @@ git checkout -b feature/<short-description>
 
 Only commit to `master` when explicitly instructed to do so.
 
+## Git Worktrees
+
+Five reusable worktrees live under `.worktrees/` in the repo root:
+
+| Worktree | Path | Placeholder branch |
+|---|---|---|
+| stardroid-alpha | `.worktrees/stardroid-alpha` | `worktree/stardroid-alpha` |
+| stardroid-beta | `.worktrees/stardroid-beta` | `worktree/stardroid-beta` |
+| stardroid-gamma | `.worktrees/stardroid-gamma` | `worktree/stardroid-gamma` |
+| stardroid-delta | `.worktrees/stardroid-delta` | `worktree/stardroid-delta` |
+| stardroid-epsilon | `.worktrees/stardroid-epsilon` | `worktree/stardroid-epsilon` |
+
+**To claim a worktree for a task:** check out your feature branch inside it:
+```
+git -C .worktrees/stardroid-alpha checkout -b feature/my-task
+```
+
+**To reset a worktree** when done (returns it to its placeholder branch):
+```
+git -C .worktrees/stardroid-alpha checkout worktree/stardroid-alpha
+git branch -D feature/my-task   # if the branch was merged or is no longer needed
+```
+
+Each worktree already contains the build-critical files excluded from version control
+(`stardroid-v1/local.properties`, `stardroid-v1/app/local.properties`,
+`stardroid-v1/app/no-checkin.properties`, keystores, `stardroid-v1/fastlane/play-store-credentials.json`). If you add a new worktree, copy
+these files from the main worktree (`stardroid-v1/app/`) before building.
+
+`.worktrees/` is listed in `.gitignore` so worktree directories are never accidentally committed.
+
 ## Build Flavors
 
 - **gms** - Includes Google Play Services (Analytics, Location). Requires `no-checkin.properties`

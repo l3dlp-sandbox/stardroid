@@ -23,6 +23,7 @@ Thumbs.db
 !.claude/skills/
 .history/
 *.gradle-e
+.worktrees/
 
 # --- Maven/Robolectric cache ---
 .m2/
