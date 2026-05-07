@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.view.doOnLayout
 import coil.load
 import com.google.android.stardroid.R
 import com.google.android.stardroid.math.LatLong
@@ -59,9 +60,17 @@ class StadiaMapsAdapter @Inject constructor(
 
         val iv = imageView ?: return
         
-        // If view is not yet laid out, wait and try again
+        // Ensure the image view is visible before attempting to load or get its dimensions.
+        // If it was previously hidden due to an error, we show it again for the new attempt.
+        if (iv.visibility != View.VISIBLE) {
+            iv.visibility = View.VISIBLE
+            fallbackLabel?.visibility = View.GONE
+        }
+        
+        // If view is not yet laid out, wait and try again. Use doOnLayout to avoid
+        // potential infinite loops from post() if layout never happens or is delayed.
         if (iv.width == 0 || iv.height == 0) {
-            iv.post { updateLocation(location) }
+            iv.doOnLayout { updateLocation(location) }
             return
         }
 

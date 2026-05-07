@@ -114,10 +114,6 @@ android {
         gms {
             resValue "string", "analytics_enabled", "true"
             dimension "sourciness"
-            if (project.file('no-checkin.properties').exists()) {
-                def signingProperties = new Properties()
-                signingProperties.load(project.file('no-checkin.properties').newDataInputStream())
-            }
         }
 
         // uses only open source software

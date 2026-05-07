@@ -98,7 +98,7 @@ class LocationControllerTest {
         assertThat(controller.currentState()).isInstanceOf(LocationState.PermissionDenied::class.java)
     }
 
-    // --- Distance gate ---
+    // --- Updates ---
 
     @Test
     fun locationUpdate_firstFix_alwaysUpdatesModel() {
@@ -108,24 +108,14 @@ class LocationControllerTest {
     }
 
     @Test
-    fun locationUpdate_belowThreshold_doesNotUpdateState() {
+    fun locationUpdate_alwaysUpdatesState() {
         controller.start()
         controller.testOnlyInvokeLocationUpdate(london, null)
-        // Sub-metre move — well below 2000 m threshold
+        // Even a tiny move updates state now, as we rely on the provider's own filtering.
         val veryClose = LatLong(51.50001f, -0.1f)
         controller.testOnlyInvokeLocationUpdate(veryClose, null)
         val state = controller.currentState() as LocationState.Confirmed
-        assertThat(state.location).isEqualTo(london)
-    }
-
-    @Test
-    fun locationUpdate_aboveThreshold_updatesState() {
-        controller.start()
-        controller.testOnlyInvokeLocationUpdate(london, null)
-        controller.testOnlyInvokeLocationUpdate(tokyo, null)
-        val state = controller.currentState() as LocationState.Confirmed
-        assertThat(state.location).isEqualTo(tokyo)
-        assertThat(state.source).isEqualTo(LocationSource.AUTO)
+        assertThat(state.location).isEqualTo(veryClose)
     }
 
     // --- Manual location ---

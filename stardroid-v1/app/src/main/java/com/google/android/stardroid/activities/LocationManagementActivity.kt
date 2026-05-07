@@ -180,7 +180,10 @@ class LocationManagementActivity : FragmentActivity(),
     }
 
     private fun showDialog(fragment: androidx.fragment.app.DialogFragment) {
-        fragment.show(supportFragmentManager, fragment::class.java.simpleName)
+        val tag = fragment::class.java.simpleName
+        if (supportFragmentManager.findFragmentByTag(tag) == null) {
+            fragment.show(supportFragmentManager, tag)
+        }
     }
 
     private fun updateUi(state: LocationState) {
@@ -244,19 +247,17 @@ class LocationManagementActivity : FragmentActivity(),
     }
     private fun showMapMessage(message: String) {
         val mapView = findViewById<View>(R.id.map_view)
-        if (mapView != null && mapView.isVisible) {
-            return
-        }
         val fallbackLabel = findViewById<TextView>(R.id.map_unavailable_label)
+        
         if (fallbackLabel != null) {
             fallbackLabel.text = message
             fallbackLabel.visibility = View.VISIBLE
-            return
         }
-        mapContainer.removeAllViews()
-        val tv = TextView(this)
-        tv.text = message
-        tv.setPadding(32, 32, 32, 32)
-        mapContainer.addView(tv)
+        
+        // Hide map view while showing a message, unless the message is just coordinate info
+        // being shown as a placeholder for a confirmed location.
+        if (locationController.currentState() !is LocationState.Confirmed) {
+            mapView?.visibility = View.GONE
+        }
     }
 }

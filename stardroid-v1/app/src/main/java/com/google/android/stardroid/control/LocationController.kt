@@ -182,13 +182,15 @@ class LocationController @Inject constructor(
     }
 
     private fun loadManualLocation() {
-        val latStr = preferences.getString(ApplicationConstants.LATITUDE_PREF_KEY, "")
-        val lonStr = preferences.getString(ApplicationConstants.LONGITUDE_PREF_KEY, "")
-        if (!latStr.isNullOrEmpty() && !lonStr.isNullOrEmpty()) {
-            try {
-                val lat = latStr.toFloat()
-                val lon = lonStr.toFloat()
-                if (lat != 0f || lon != 0f) {
+        if (preferences.contains(ApplicationConstants.LATITUDE_PREF_KEY) &&
+            preferences.contains(ApplicationConstants.LONGITUDE_PREF_KEY)
+        ) {
+            val latStr = preferences.getString(ApplicationConstants.LATITUDE_PREF_KEY, "")
+            val lonStr = preferences.getString(ApplicationConstants.LONGITUDE_PREF_KEY, "")
+            if (!latStr.isNullOrEmpty() && !lonStr.isNullOrEmpty()) {
+                try {
+                    val lat = latStr.toFloat()
+                    val lon = lonStr.toFloat()
                     val location = LatLong(lat, lon)
                     astronomerModel.setLocation(location)
                     transitionTo(
@@ -200,9 +202,9 @@ class LocationController @Inject constructor(
                         )
                     )
                     return
+                } catch (_: NumberFormatException) {
+                    Log.w(TAG, "Loaded invalid location from preferences $latStr, $lonStr")
                 }
-            } catch (_: NumberFormatException) {
-                Log.w(TAG, "Loaded invalid location from preferences $latStr, $lonStr")
             }
         }
         transitionTo(LocationState.Unset)
