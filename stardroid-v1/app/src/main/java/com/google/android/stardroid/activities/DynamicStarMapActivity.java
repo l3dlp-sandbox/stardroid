@@ -792,7 +792,7 @@ public class DynamicStarMapActivity extends androidx.fragment.app.FragmentActivi
     LocationState state = lc.currentState();
     if (state instanceof LocationState.Confirmed
         && ((LocationState.Confirmed) state).getSource() ==
-            com.google.android.stardroid.control.LocationSource.AUTO) {
+            LocationSource.AUTO) {
       if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
           != PackageManager.PERMISSION_GRANTED) {
         lc.onPermissionRevoked();
