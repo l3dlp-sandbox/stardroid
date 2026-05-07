@@ -197,6 +197,18 @@ public class DiagnosticActivity extends androidx.fragment.app.FragmentActivity
       locationMessage = getString(R.string.location_diagnostic_format,
           confirmed.getLocation().getLatitude(), confirmed.getLocation().getLongitude(),
           confirmed.getSource().name().toLowerCase());
+    } else if (locationState instanceof LocationState.Unset) {
+      locationMessage = getString(R.string.location_source_unset);
+    } else if (locationState instanceof LocationState.Acquiring) {
+      locationMessage = getString(R.string.location_source_acquiring);
+    } else if (locationState instanceof LocationState.HardwareUnavailable) {
+      locationMessage = getString(R.string.location_source_hardware_unavailable);
+    } else if (locationState instanceof LocationState.PermissionDenied) {
+      locationMessage = getString(R.string.diagnostics_activity_location_permission_denied);
+    } else if (locationState instanceof LocationState.PermissionPermanentlyDenied) {
+      locationMessage = getString(R.string.location_permanently_denied_message);
+    } else if (locationState instanceof LocationState.AcquiringTimeout) {
+      locationMessage = getString(R.string.location_acquiring_message);
     } else {
       locationMessage = locationState.getClass().getSimpleName();
     }
