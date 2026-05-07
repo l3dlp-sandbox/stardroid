@@ -29,6 +29,7 @@ import com.google.android.stardroid.control.LocationSource
 import com.google.android.stardroid.control.LocationState
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
+import androidx.core.view.isVisible
 
 @AndroidEntryPoint
 class LocationManagementActivity : FragmentActivity(),
@@ -199,7 +200,8 @@ class LocationManagementActivity : FragmentActivity(),
                     getString(R.string.location_switch_to_manual)
                 else
                     getString(R.string.location_switch_to_auto)
-                changeButton.visibility = if (state.source == LocationSource.MANUAL) View.VISIBLE else View.GONE
+                changeButton.visibility = if (
+                    state.source == LocationSource.MANUAL) View.VISIBLE else View.GONE
                 updateMapPin(state)
             }
             is LocationState.Acquiring -> {
@@ -228,21 +230,21 @@ class LocationManagementActivity : FragmentActivity(),
 
     // Map lifecycle hooks — overridden in GMS instrumentation layer if needed, or handled via
     // runtime detection (see US6 tasks T040/T041)
-    protected fun initMap(savedInstanceState: Bundle?) {
+    private fun initMap(savedInstanceState: Bundle?) {
         val mapView = findViewById<View>(R.id.map_view)
         if (mapView != null) {
             mapAdapter.initialize(mapView, savedInstanceState)
         }
     }
-    protected fun updateMapPin(state: LocationState.Confirmed) {
+    private fun updateMapPin(state: LocationState.Confirmed) {
         mapAdapter.updateLocation(state.location)
         showMapMessage(getString(
             R.string.location_long_lat,
             state.location.longitude, state.location.latitude))
     }
-    protected fun showMapMessage(message: String) {
+    private fun showMapMessage(message: String) {
         val mapView = findViewById<View>(R.id.map_view)
-        if (mapView != null && mapView.visibility == View.VISIBLE) {
+        if (mapView != null && mapView.isVisible) {
             return
         }
         val fallbackLabel = findViewById<TextView>(R.id.map_unavailable_label)

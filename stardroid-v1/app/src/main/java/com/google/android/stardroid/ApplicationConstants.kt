@@ -82,7 +82,6 @@ object ApplicationConstants {
   const val WARM_WELCOME_ENABLED = false
 
   // Location
-  const val METERS_PER_DEGREE_LATITUDE = 111_320f
   const val LOCATION_UPDATE_MIN_DISTANCE_METRES = 2000f
   const val LOCATION_ACQUIRING_TIMEOUT_MS = 30_000L
 }

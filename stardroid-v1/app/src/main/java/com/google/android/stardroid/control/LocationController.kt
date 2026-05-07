@@ -149,30 +149,21 @@ class LocationController @Inject constructor(
         onLocationUpdate(location, accuracy)
 
     private fun onLocationUpdate(location: LatLong, accuracy: Float?) {
-        val current = state
-        val distanceDegrees = if (current is LocationState.Confirmed) {
-            current.location.distanceFrom(location)
-        } else {
-            Float.MAX_VALUE
+        // The LocationProvider already filters by minDistanceMetres at the OS level,
+        // so any callback here is a meaningful position change.
+        cancelAcquiringTimeout()
+        astronomerModel.setLocation(location)
+        preferences.edit {
+            putString(ApplicationConstants.LATITUDE_PREF_KEY, location.latitude.toString())
+            putString(ApplicationConstants.LONGITUDE_PREF_KEY, location.longitude.toString())
         }
-        val minDistanceDegrees = ApplicationConstants.LOCATION_UPDATE_MIN_DISTANCE_METRES /
-            ApplicationConstants.METERS_PER_DEGREE_LATITUDE
-        if (distanceDegrees >= minDistanceDegrees) {
-            cancelAcquiringTimeout()
-            astronomerModel.setLocation(location)
-            preferences.edit {
-                putString(ApplicationConstants.LATITUDE_PREF_KEY, location.latitude.toString())
-                putString(ApplicationConstants.LONGITUDE_PREF_KEY, location.longitude.toString())
-            }
-            val confirmed = LocationState.Confirmed(
-                location = location,
-                source = LocationSource.AUTO,
-                accuracy = accuracy,
-                timestamp = System.currentTimeMillis()
-            )
-            transitionTo(confirmed)
-            showLocationToast(location)
-        }
+        transitionTo(LocationState.Confirmed(
+            location = location,
+            source = LocationSource.AUTO,
+            accuracy = accuracy,
+            timestamp = System.currentTimeMillis()
+        ))
+        showLocationToast(location)
     }
 
     private fun scheduleAcquiringTimeout() {
@@ -221,8 +212,8 @@ class LocationController @Inject constructor(
         backgroundExecutor.execute {
             val name = tryReverseGeocode(location)
             val locName = name ?: context.getString(
-                R.string.location_long_lat).format(
-                location.latitude, location.longitude)
+                R.string.location_long_lat,
+                location.longitude, location.latitude)
             val msg = context.getString(R.string.location_set_auto).format(locName)
             handler.post { Toast.makeText(context, msg, Toast.LENGTH_SHORT).show() }
         }
