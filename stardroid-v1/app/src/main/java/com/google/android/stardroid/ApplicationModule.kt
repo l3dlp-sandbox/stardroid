@@ -74,7 +74,7 @@ class ApplicationModule {
 
   @Provides
   @Singleton
-  fun provideBackgroundExecutor(): ScheduledExecutorService = ScheduledThreadPoolExecutor(1)
+  fun provideBackgroundExecutor(): ScheduledExecutorService = ScheduledThreadPoolExecutor(4)
 
   @Provides
   @Singleton

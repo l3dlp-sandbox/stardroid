@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ProgressBar
 import android.widget.TextView
 import com.google.android.stardroid.R
 import com.google.android.stardroid.control.LocationController
@@ -28,6 +29,8 @@ class ManualLocationEntryDialogFragment : DialogFragment() {
     private lateinit var placeErrorText: TextView
     private lateinit var latErrorText: TextView
     private lateinit var lonErrorText: TextView
+    private lateinit var resolveButton: Button
+    private lateinit var resolveProgress: ProgressBar
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val view = LayoutInflater.from(requireContext())
@@ -50,7 +53,9 @@ class ManualLocationEntryDialogFragment : DialogFragment() {
         }
         if (prefillName.isNotEmpty()) placeNameEdit.setText(prefillName)
 
-        view.findViewById<Button>(R.id.manual_resolve_button).setOnClickListener {
+        resolveButton = view.findViewById(R.id.manual_resolve_button)
+        resolveProgress = view.findViewById(R.id.manual_resolve_progress)
+        resolveButton.setOnClickListener {
             resolvePlace(view)
         }
         view.findViewById<Button>(R.id.manual_set_location_button).setOnClickListener {
@@ -73,6 +78,7 @@ class ManualLocationEntryDialogFragment : DialogFragment() {
             return
         }
 
+        setResolving(true)
         val appContext = requireContext().applicationContext
         backgroundExecutor.execute {
             try {
@@ -80,6 +86,7 @@ class ManualLocationEntryDialogFragment : DialogFragment() {
                 val results = Geocoder(appContext).getFromLocationName(name, 1)
                 activity?.runOnUiThread {
                     if (!isAdded) return@runOnUiThread
+                    setResolving(false)
                     if (results.isNullOrEmpty()) {
                         showPlaceError(getString(R.string.location_place_not_found))
                     } else {
@@ -93,15 +100,32 @@ class ManualLocationEntryDialogFragment : DialogFragment() {
             } catch (e: IOException) {
                 activity?.runOnUiThread {
                     if (!isAdded) return@runOnUiThread
+                    setResolving(false)
                     showPlaceError(getString(R.string.location_geocoder_offline))
                 }
             }
         }
     }
 
+    private fun setResolving(resolving: Boolean) {
+        resolveButton.isEnabled = !resolving
+        resolveProgress.visibility = if (resolving) View.VISIBLE else View.GONE
+    }
+
     private fun showPlaceError(message: String) {
         placeErrorText.text = message
         placeErrorText.visibility = View.VISIBLE
+    }
+
+    private fun parseCoordinate(str: String): Float? {
+        val format = java.text.NumberFormat.getInstance()
+        val pos = java.text.ParsePosition(0)
+        val number = format.parse(str, pos)
+        if (pos.index == str.length && pos.errorIndex == -1 && number != null) {
+            return number.toFloat()
+        }
+        // Fallback to strict period/comma-lenient parsing to support cross-locale copy-paste
+        return str.replace(',', '.').toFloatOrNull()
     }
 
     private fun trySetLocation() {
@@ -110,8 +134,8 @@ class ManualLocationEntryDialogFragment : DialogFragment() {
         val latStr = latEdit.text.toString().trim()
         val lonStr = lonEdit.text.toString().trim()
 
-        val lat = latStr.toFloatOrNull()
-        val lon = lonStr.toFloatOrNull()
+        val lat = parseCoordinate(latStr)
+        val lon = parseCoordinate(lonStr)
 
         if (lat == null || lat < -90f || lat > 90f) {
             latErrorText.text = getString(R.string.location_invalid_latitude)

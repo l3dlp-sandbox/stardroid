@@ -14,12 +14,28 @@
         android:imeOptions="actionSearch"
         android:maxLines="1" />
 
-    <Button
-        android:id="@+id/manual_resolve_button"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
-        android:text="@string/location_resolve_button" />
+        android:gravity="end|center_vertical"
+        android:orientation="horizontal">
+
+        <ProgressBar
+            android:id="@+id/manual_resolve_progress"
+            style="?android:attr/progressBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/manual_resolve_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/location_resolve_button" />
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/manual_place_error_text"
