@@ -4,39 +4,17 @@
     <string name="menu_settings" translation_description="Settings menu item in the options menu">Instellingen</string>
     <string name="menu_search" translation_description="Search menu item in the options menu">Zoeken</string>
     <string name="cancel" translation_description="Generic cancel button label used in dialogs">Annuleren</string>
-    <string name="set" translation_description="Button label. Set the date to the given value">Instellen</string>
     <string name="go" translation_description="Button to start navigating the sky map toward a searched object">Ga!</string>
     <string name="start_from_now" translation_description="Button in the time travel dialog to start time travelling from the current time">Nu starten</string>
     <string name="other_prefs" translation_description="Preferences category heading for miscellaneous settings">Overig</string>
-    <string name="location_prefs" translation_description="Preferences category heading for location-related settings">Locatie-instellingen</string>
     <string name="controls_prefs" translation_description="Preferences category heading for touch control settings">Bediening</string>
-    <string name="force_gps_pref" translation_description="Preference label: force GPS use even when network location is available">Altijd GPS gebruiken</string>
-    <string name="force_gps_pref_hint" translation_description="this string continues from \'Always use GPS\'">indien ingeschakeld, zelfs als een netwerklocatie beschikbaar is</string>
-    <string name="no_use_gps_pref" translation_description="Preference label: choose to enter location by hand instead of using GPS or phone location">Locatie handmatig instellen</string>
-    <string name="no_use_gps_pref_hint" translation_description="Hint text beneath the \'Set location manually\' preference">Geef hieronder een plaats of lengte-/breedtegraad op</string>
-    <string name="location_placename" translation_description="Label for the place-name text field in manual location settings">Plaatsnaam</string>
-    <string name="location_placename_hint" translation_description="An example address.  Translators: please pick an address suitable for your country.  If it has an astronomical connection (e.g. the address of an observatory or famous astronomer) then that would be even better.">Bijvoorbeeld: Oude Hoogeveensedijk 4, Dwingeloo.</string>
-    <string name="location_lat_pref" translation_description="Label for the latitude input field in manual location settings">Breedtegraad</string>
-    <string name="location_long_pref" translation_description="Label for the longitude input field in manual location settings">Geografische lengte</string>
-    <string name="degrees" translation_description="angular degrees - used for latitude and longitude">Graden</string>
-    <string name="preferences" translation_description="Provider-name label used internally when a location is set from preferences (not shown directly to the user as a UI label - does not require a translation)">voorkeuren</string>
-    <string name="location_offer_to_enable" translation_description="Dialog message asking whether to enable automatic location">Automatische locatiedetectie is uitgeschakeld. Wilt u deze functie inschakelen?</string>
-    <string name="location_offer_to_enable_gps_title" translation_description="Title of dialog shown when automatic location is disabled">Automatische locatiedetectie uitgeschakeld</string>
     <string name="location_permission_dialog_title" translation_description="Title of the dialog that requests location permission from the user">Locatie vereist</string>
-    <string name="location_permission_dialog_message" translation_description="Body text of the dialog requesting location permission, explaining why the app needs it and what happens without it">
-    Sky Map heeft uw geschatte locatie nodig om de juiste nachtelijke hemel weer te geven. U kunt toestemming geven, uw locatie handmatig invoeren of dit later beslissen. Als u dit later besluit, is de kaart niet nauwkeurig totdat uw locatie is ingesteld.
-    </string>
+    <string name="location_permission_dialog_message">Sky Map heeft uw geschatte locatie nodig om de juiste nachtelijke hemel weer te geven. U kunt toestemming geven, uw locatie handmatig invoeren of dit later beslissen. Als u dit later besluit, is de kaart niet nauwkeurig totdat uw locatie is ingesteld.</string>
     <string name="location_permission_grant" translation_description="Button in the location permission dialog to grant location access">Toestemming geven</string>
     <string name="location_permission_enter_manually" translation_description="Button in the location permission dialog to enter location by hand instead of granting permission">Handmatig invoeren</string>
     <!-- tm:omitted name="location_permission_later" reason="identical_to_source" -->
-    <string name="location_warning_permission" translation_description="Warning message shown when location is unavailable because permission was not granted">Locatie niet beschikbaar — toestemming niet verleend.</string>
-    <string name="location_warning_manual" translation_description="Warning message shown when manual location mode is selected but no coordinates have been entered">Locatie niet ingesteld — configureer in Instellingen.</string>
     <string name="location_set_auto" translation_description="Toast message when automatic location is acquired. %1$s is the place name or coordinates">Locatie ingesteld op %1$s</string>
-    <string name="location_unable_to_geocode" translation_description="Error message when converting a place name to coordinates (geocoding) fails, possibly due to no network">Kan uw locatie niet decoderen - misschien is uw netwerk niet beschikbaar?</string>
-    <string name="location_not_found_title" translation_description="dialog box title when location not found">Helaas</string>
-    <string name="location_not_found" translation_description="dialog message when placename not found">%s niet gevonden.</string>
     <string name="location_long_lat" translation_description="Formatted display of longitude and latitude. %1$.2f is longitude, %2$.2f is latitude">Lengtegraad:%1$.2f, breedtegraad:%2$.2f</string>
-    <string name="location_place_found" translation_description="Status message when a place name was successfully looked up. %1$f is latitude, %2$f is longitude">Plaats gevonden. Breedtegraad %1$f en lengtegraad %2$f worden ingesteld</string>
     <string name="use_magnetic_correction" translation_description="Preference label: apply magnetic declination correction so the compass points to true north instead of magnetic north">Magnetische correctie gebruiken</string>
     <string name="manual_compass_adjustment_title" translation_description="Preference title: lets the user add a manual degree offset to the compass reading">Aanvullende kompasaanpassing</string>
     <string name="manual_compass_adjustment_summary" translation_description="Summary for the manual compass adjustment preference">Extra offset in graden (+ of −) toegevoegd aan kompaslezing</string>
@@ -62,7 +40,6 @@
     Geeft de lucht een blauwe tint nabij de zon en donker aan de tegenovergestelde zijde
     </string>
     <string name="ecliptic" translation_description="Label for the ecliptic layer — the apparent annual path of the Sun across the sky">Ecliptica</string>
-    <string name="malformed_loc_error" translation_description="Error message when a non-numeric value is entered for latitude or longitude">De ingestelde breedte- of lengtegraad is geen getal.</string>
     <string name="dialog_accept" translation_description="accepting the licence agreement">Accepteren</string>
     <string name="dialog_decline" translation_description="declining the licence agreement">Nee, bedankt</string>
     <!-- tm:omitted name="dialog_ok_button" reason="identical_to_source" -->

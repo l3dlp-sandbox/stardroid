@@ -63,7 +63,7 @@ object ApplicationConstants {
   const val SENSOR_DAMPING_PREF_KEY = "sensor_damping"
   const val REVERSE_MAGNETIC_Z_PREFKEY = "reverse_magnetic_z"
   const val MANUAL_COMPASS_ADJUSTMENT_PREF_KEY = "manual_compass_adjustment"
-  const val VIEW_MODE_PREFKEY = "viewing_direction"
+  const val VIEW_MODE_PREF_KEY = "viewing_direction"
 
   // Night mode preference values (must match ActivityLightLevelManager.LightMode enum names)
   const val NIGHT_MODE_VALUE = "NIGHT"
@@ -74,8 +74,14 @@ object ApplicationConstants {
 
   const val AUTO_LEVEL_HORIZON_PREF_KEY = "auto_level_horizon"
   const val NO_AUTO_LOCATE_PREF_KEY = "no_auto_locate"
+  const val LATITUDE_PREF_KEY = "latitude"
+  const val LONGITUDE_PREF_KEY = "longitude"
 
   // Feature flags
   /** Set to true to enable the warm welcome onboarding flow. */
   const val WARM_WELCOME_ENABLED = false
+
+  // Location
+  const val LOCATION_UPDATE_MIN_DISTANCE_METRES = 2000f
+  const val LOCATION_ACQUIRING_TIMEOUT_MS = 30_000L
 }

@@ -37,16 +37,16 @@ import dagger.hilt.android.scopes.ActivityScoped;
 public class ControllerGroup implements Controller {
   private final static String TAG = MiscUtil.getTag(ControllerGroup.class);
   private final ArrayList<Controller> controllers = new ArrayList<Controller>();
-  private ZoomController zoomController;
-  private ManualOrientationController manualDirectionController;
-  private SensorOrientationController sensorOrientationController;
-  private TimeTravelClock timeTravelClock = new TimeTravelClock();
-  private TransitioningCompositeClock transitioningClock = new TransitioningCompositeClock(
+  private final ZoomController zoomController;
+  private final ManualOrientationController manualDirectionController;
+  private final SensorOrientationController sensorOrientationController;
+  private final TimeTravelClock timeTravelClock = new TimeTravelClock();
+  private final TransitioningCompositeClock transitioningClock = new TransitioningCompositeClock(
       timeTravelClock, new RealClock());
-  private TeleportingController teleportingController;
+  private final TeleportingController teleportingController;
   private boolean usingAutoMode = true;
   private AstronomerModel model;
-  private LocationController locationController;
+  private final LocationController locationController;
 
   // TODO(jontayler): inject everything else.
   @Inject
