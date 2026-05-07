@@ -74,7 +74,12 @@ class ApplicationModule {
 
   @Provides
   @Singleton
-  fun provideBackgroundExecutor(): ScheduledExecutorService = ScheduledThreadPoolExecutor(4)
+  fun provideBackgroundExecutor(): ScheduledExecutorService {
+    val cpuCount = Runtime.getRuntime().availableProcessors();
+    // I/O-Bound (Network calls, Database, File writing)
+    val corePoolSize = cpuCount * 2;
+    return ScheduledThreadPoolExecutor(corePoolSize)
+  }
 
   @Provides
   @Singleton
