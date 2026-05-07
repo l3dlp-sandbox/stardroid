@@ -2,7 +2,6 @@ package com.google.android.stardroid.activities
 
 import android.Manifest
 import android.content.pm.PackageManager
-import android.graphics.Color
 import android.graphics.PorterDuff
 import android.os.Bundle
 import android.view.View
@@ -108,7 +107,7 @@ class LocationManagementActivity : FragmentActivity(),
     override fun setNightMode(nightMode: Boolean) {
         this.nightMode = nightMode
         NightModeHelper.applyActionBarNightMode(actionBar, this, nightMode)
-        val textColor = if (nightMode) getColor(R.color.night_text_color) else Color.WHITE
+        val textColor = if (nightMode) getColor(R.color.night_text_color) else getColor(android.R.color.white)
         val root = findViewById<View>(android.R.id.content)
         if (root is ViewGroup) {
             NightModeHelper.tintTextViews(root, textColor)

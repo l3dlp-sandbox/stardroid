@@ -17,7 +17,6 @@ class PlatformLocationProvider @Inject constructor(
 ) : LocationProvider {
 
     private val locationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
-    private var currentAccuracy: Float? = null
     private var activeListeners = mutableListOf<LocationListener>()
     private var updateCallback: ((LatLong, Float?) -> Unit)? = null
 
@@ -25,7 +24,6 @@ class PlatformLocationProvider @Inject constructor(
     override fun startUpdates(minDistanceMetres: Float, onUpdate: (LatLong, Float?) -> Unit) {
         stopUpdates()
         updateCallback = onUpdate
-        currentAccuracy = null
 
         for (provider in listOf(LocationManager.GPS_PROVIDER, LocationManager.NETWORK_PROVIDER)) {
             if (!locationManager.isProviderEnabled(provider)) continue
@@ -43,12 +41,8 @@ class PlatformLocationProvider @Inject constructor(
     private fun createListener(onUpdate: (LatLong, Float?) -> Unit): LocationListener {
         return object : LocationListener {
             override fun onLocationChanged(location: Location) {
-                val newAccuracy = if (location.hasAccuracy()) location.accuracy else null
-                val prevAccuracy = currentAccuracy
-                if (prevAccuracy == null || newAccuracy == null || newAccuracy <= prevAccuracy) {
-                    currentAccuracy = newAccuracy
-                    onUpdate(LatLong(location.latitude, location.longitude), newAccuracy)
-                }
+                val accuracy = if (location.hasAccuracy()) location.accuracy else null
+                onUpdate(LatLong(location.latitude, location.longitude), accuracy)
             }
 
             @Deprecated("Deprecated in Java")
@@ -60,7 +54,6 @@ class PlatformLocationProvider @Inject constructor(
         activeListeners.forEach { locationManager.removeUpdates(it) }
         activeListeners.clear()
         updateCallback = null
-        currentAccuracy = null
     }
 
     override fun isAvailable(): Boolean {
