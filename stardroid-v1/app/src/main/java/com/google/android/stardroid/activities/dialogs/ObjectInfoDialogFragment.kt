@@ -105,17 +105,20 @@ class ObjectInfoDialogFragment : DialogFragment() {
         val imageContainer = view.findViewById<View>(R.id.object_info_image_container)
         val imageView = view.findViewById<ImageView>(R.id.object_info_image)
         if (info.imagePath != null) {
-            imageDisposable = imageView.load("file:///android_asset/${info.imagePath}") {
+            val assetUri = "file:///android_asset/${info.imagePath}"
+            imageDisposable = imageView.load(assetUri) {
                 crossfade(true)
                 listener(onSuccess = { _, _ ->
                     if (!isAdded) return@listener
                     if (isNight) imageView.setColorFilter(nightTextColor, PorterDuff.Mode.MULTIPLY)
-                    imageContainer.visibility = View.VISIBLE
-                    imageContainer.setOnClickListener {
-                        ImageExpandDialogFragment.newInstance(info.imagePath, info.imageCredit)
-                            .show(parentFragmentManager, "ExpandedImage")
-                    }
                 })
+            }
+            if (isAdded) {
+                imageContainer.visibility = View.VISIBLE
+                imageContainer.setOnClickListener {
+                    ImageExpandDialogFragment.newInstance(info.imagePath, info.imageCredit)
+                        .show(parentFragmentManager, "ExpandedImage")
+                }
             }
         }
 
