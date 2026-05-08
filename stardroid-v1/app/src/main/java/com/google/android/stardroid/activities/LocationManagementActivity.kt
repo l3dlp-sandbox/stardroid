@@ -246,5 +246,7 @@ class LocationManagementActivity : FragmentActivity(),
     private fun showFallbackLabel(messageResId: Int) {
         fallbackLabel.text = getString(messageResId)
         fallbackLabel.visibility = View.VISIBLE
+        val mapView = findViewById<View>(R.id.map_view)
+        mapView?.visibility = View.GONE
     }
 }
