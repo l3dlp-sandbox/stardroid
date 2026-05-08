@@ -118,6 +118,7 @@ class StadiaMapsAdapter @Inject constructor(
             }
             is LoadResult.Failure -> {
                 imageView?.visibility = View.GONE
+                fallbackLabel?.text = fallbackLabel?.context?.getString(R.string.location_map_unavailable)
                 fallbackLabel?.visibility = View.VISIBLE
             }
             LoadResult.Loading -> {
