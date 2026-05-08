@@ -27,6 +27,14 @@ class StadiaMapsAdapter @Inject constructor(
     private var apiKey: String? = null
     private var lastLocation: LatLong? = null
 
+    private sealed class LoadResult {
+        object Loading : LoadResult()
+        object Success : LoadResult()
+        data class Failure(val errorCode: String) : LoadResult()
+    }
+
+    private var loadResult: LoadResult = LoadResult.Failure("unset")
+
     override fun initialize(mapView: View, savedInstanceState: Bundle?) {
         if (mapView is ImageView) {
             this.imageView = mapView
@@ -53,20 +61,13 @@ class StadiaMapsAdapter @Inject constructor(
         val key = apiKey ?: return
         if (key == "unset" || key.isEmpty()) {
             Log.w("StadiaMapsAdapter", "Stadia Maps API key is not set.")
-            showError()
+            setLoadResult(LoadResult.Failure("missing_key"))
             trackMapLoad(false, "missing_key")
             return
         }
 
         val iv = imageView ?: return
-        
-        // Ensure the image view is visible before attempting to load or get its dimensions.
-        // If it was previously hidden due to an error, we show it again for the new attempt.
-        if (iv.visibility != View.VISIBLE) {
-            iv.visibility = View.VISIBLE
-            fallbackLabel?.visibility = View.GONE
-        }
-        
+
         // If view is not yet laid out, wait and try again. Use doOnLayout to avoid
         // potential infinite loops from post() if layout never happens or is delayed.
         if (iv.width == 0 || iv.height == 0) {
@@ -87,25 +88,43 @@ class StadiaMapsAdapter @Inject constructor(
                 "&size=${width}x${height}" +
                 "&markers=${location.latitude},${location.longitude}"
 
+        setLoadResult(LoadResult.Loading)
         iv.load(urlStr) {
             listener(
                 onSuccess = { _, _ ->
-                    iv.visibility = View.VISIBLE
-                    fallbackLabel?.visibility = View.GONE
+                    setLoadResult(LoadResult.Success)
                     trackMapLoad(true, null)
                 },
                 onError = { _, result ->
-                    Log.e("StadiaMapsAdapter", "Error loading map: ${result.throwable.message}")
-                    showError()
-                    trackMapLoad(false, result.throwable.message ?: "unknown_error")
+                    val errorCode = result.throwable.message ?: "unknown_error"
+                    Log.e("StadiaMapsAdapter", "Error loading map: $errorCode")
+                    setLoadResult(LoadResult.Failure(errorCode))
+                    trackMapLoad(false, errorCode)
                 }
             )
         }
     }
 
-    private fun showError() {
-        imageView?.visibility = View.GONE
-        fallbackLabel?.visibility = View.VISIBLE
+    private fun setLoadResult(result: LoadResult) {
+        loadResult = result
+        applyLoadState()
+    }
+
+    private fun applyLoadState() {
+        when (loadResult) {
+            LoadResult.Success -> {
+                imageView?.visibility = View.VISIBLE
+                fallbackLabel?.visibility = View.GONE
+            }
+            is LoadResult.Failure -> {
+                imageView?.visibility = View.GONE
+                fallbackLabel?.visibility = View.VISIBLE
+            }
+            LoadResult.Loading -> {
+                imageView?.visibility = View.VISIBLE
+                fallbackLabel?.visibility = View.GONE
+            }
+        }
     }
 
     private fun trackMapLoad(success: Boolean, errorCode: String?) {
