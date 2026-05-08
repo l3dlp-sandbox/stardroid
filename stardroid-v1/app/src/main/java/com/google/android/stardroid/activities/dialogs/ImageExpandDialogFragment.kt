@@ -20,9 +20,9 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.google.android.stardroid.R
+import coil.load
+import coil.request.Disposable
 import com.google.android.stardroid.activities.util.ActivityLightLevelManager
-import com.google.android.stardroid.util.AssetImageLoader
-import com.google.android.stardroid.util.ImageLoadHandle
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -34,7 +34,7 @@ import javax.inject.Inject
 class ImageExpandDialogFragment : DialogFragment() {
     @Inject lateinit var preferences: SharedPreferences
 
-    private var imageLoadHandle: ImageLoadHandle? = null
+    private var imageDisposable: Disposable? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,13 +54,11 @@ class ImageExpandDialogFragment : DialogFragment() {
 
         val imagePath = arguments?.getString(ARG_IMAGE_PATH)
         if (imagePath != null) {
-            imageLoadHandle = AssetImageLoader.loadBitmapAsync(requireContext().assets, imagePath) { bitmap ->
-                if (bitmap != null && isAdded) {
-                    imageView.setImageBitmap(bitmap)
-                    if (isNight) {
-                        imageView.setColorFilter(nightTextColor, PorterDuff.Mode.MULTIPLY)
-                    }
-                }
+            imageDisposable = imageView.load("file:///android_asset/$imagePath") {
+                crossfade(true)
+                listener(onSuccess = { _, _ ->
+                    if (isNight) imageView.setColorFilter(nightTextColor, PorterDuff.Mode.MULTIPLY)
+                })
             }
         }
 
@@ -84,8 +82,8 @@ class ImageExpandDialogFragment : DialogFragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        imageLoadHandle?.cancel()
-        imageLoadHandle = null
+        imageDisposable?.dispose()
+        imageDisposable = null
     }
 
     companion object {

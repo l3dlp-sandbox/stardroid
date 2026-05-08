@@ -8,11 +8,11 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.RecyclerView
+import coil.dispose
+import coil.load
 import com.google.android.stardroid.R
 import com.google.android.stardroid.activities.util.ActivityLightLevelManager
 import com.google.android.stardroid.education.ObjectInfo
-import com.google.android.stardroid.util.AssetImageLoader
-import com.google.android.stardroid.util.ImageLoadHandle
 
 /** RecyclerView adapter that displays a grid of celestial object thumbnails. */
 class GalleryAdapter(
@@ -23,7 +23,6 @@ class GalleryAdapter(
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val imageView: ImageView = view.findViewById(R.id.thumbnail_image)
         val titleView: TextView = view.findViewById(R.id.thumbnail_title)
-        var loadHandle: ImageLoadHandle? = null
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -50,25 +49,22 @@ class GalleryAdapter(
 
         val imagePath = item.imagePath ?: return
 
-        // cancel() in AssetImageLoader atomically nulls the callback, so any load cancelled in
-        // onViewRecycled will never deliver. No need for an isAttachedToWindow guard here.
-        holder.loadHandle = AssetImageLoader.loadBitmapAsync(context.assets, imagePath) { bitmap ->
-            if (bitmap != null) {
-                holder.imageView.setImageBitmap(bitmap)
+        holder.imageView.load("file:///android_asset/$imagePath") {
+            crossfade(true)
+            listener(onSuccess = { _, _ ->
                 if (isNight) {
                     holder.imageView.setColorFilter(nightColor, PorterDuff.Mode.MULTIPLY)
                 } else {
                     holder.imageView.clearColorFilter()
                 }
-            }
+            })
         }
     }
 
     override fun onViewRecycled(holder: ViewHolder) {
         super.onViewRecycled(holder)
-        // Cancel the pending load so its callback cannot fire on a rebound ViewHolder.
-        holder.loadHandle?.cancel()
-        holder.loadHandle = null
+        // Cancels any pending Coil request attached to this ImageView.
+        holder.imageView.dispose()
         holder.imageView.setImageBitmap(null)
     }
 
