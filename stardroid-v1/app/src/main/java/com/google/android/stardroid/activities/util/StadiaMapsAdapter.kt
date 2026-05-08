@@ -112,7 +112,7 @@ class StadiaMapsAdapter @Inject constructor(
 
     private fun applyLoadState() {
         when (loadResult) {
-            LoadResult.Success -> {
+            LoadResult.Success, LoadResult.Loading -> {
                 imageView?.visibility = View.VISIBLE
                 fallbackLabel?.visibility = View.GONE
             }
@@ -120,10 +120,6 @@ class StadiaMapsAdapter @Inject constructor(
                 imageView?.visibility = View.GONE
                 fallbackLabel?.setText(R.string.location_map_unavailable)
                 fallbackLabel?.visibility = View.VISIBLE
-            }
-            LoadResult.Loading -> {
-                imageView?.visibility = View.VISIBLE
-                fallbackLabel?.visibility = View.GONE
             }
         }
     }
