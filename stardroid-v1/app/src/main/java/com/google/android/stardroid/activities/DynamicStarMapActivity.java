@@ -51,6 +51,7 @@ import android.app.ActionBar;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.annotation.VisibleForTesting;
@@ -142,8 +143,8 @@ public class DynamicStarMapActivity extends androidx.fragment.app.FragmentActivi
    * @author John Taylor
    */
   private static final class RendererModelUpdateClosure implements Runnable {
-    private RendererController rendererController;
-    private AstronomerModel model;
+    private final RendererController rendererController;
+    private final AstronomerModel model;
 
     public RendererModelUpdateClosure(AstronomerModel model,
         RendererController rendererController,
@@ -168,6 +169,7 @@ public class DynamicStarMapActivity extends androidx.fragment.app.FragmentActivi
       rendererController.queueSetViewOrientation(directionX, directionY, directionZ, upX, upY, upZ);
 
       Vector3 up = model.getPhoneUpDirection();
+      //noinspection SuspiciousNameCombination swapping x and y here is actually correct
       float angleVertClockwiseFromYaxisInRadians = MathUtils.atan2(up.x, up.y);
       rendererController.queueTextAngle(angleVertClockwiseFromYaxisInRadians);
       rendererController.queueViewerUpDirection(model.getZenith().copyForJ());
@@ -193,9 +195,7 @@ public class DynamicStarMapActivity extends androidx.fragment.app.FragmentActivi
   }
 
   // Activity for result Ids
-  public static final int GOOGLE_PLAY_SERVICES_REQUEST_CODE = 1;
-  public static final int GOOGLE_PLAY_SERVICES_REQUEST_LOCATION_PERMISSION_CODE = 2;
-  // End Activity for result Ids
+  public static final int GOOGLE_PLAY_SERVICES_REQUEST_CODE = 1;// End Activity for result Ids
 
   private static final float ROTATION_SPEED = 10;
   private static final String TAG = MiscUtil.getTag(DynamicStarMapActivity.class);
@@ -424,8 +424,7 @@ public class DynamicStarMapActivity extends androidx.fragment.app.FragmentActivi
     // Time player bar
     if (timePlayerUI != null) {
       timePlayerUI.setBackgroundColor(nightMode ? getColor(R.color.night_bar_bg) : getColor(R.color.day_bar_bg));
-      if (timePlayerUI instanceof ViewGroup) {
-        ViewGroup group = (ViewGroup) timePlayerUI;
+      if (timePlayerUI instanceof ViewGroup group) {
         for (int i = 0; i < group.getChildCount(); i++) {
           View child = group.getChildAt(i);
           if (child instanceof android.widget.RelativeLayout) {
@@ -558,8 +557,7 @@ public class DynamicStarMapActivity extends androidx.fragment.app.FragmentActivi
     MenuItem item = menu.findItem(itemId);
     if (item != null) {
       View view = item.getActionView();
-      if (view instanceof ImageButton) {
-        ImageButton btn = (ImageButton) view;
+      if (view instanceof ImageButton btn) {
         btn.setImageResource(iconRes);
         btn.setContentDescription(getString(stringRes));
         btn.setOnClickListener(v -> onOptionsItemSelected(item));
@@ -603,7 +601,7 @@ public class DynamicStarMapActivity extends androidx.fragment.app.FragmentActivi
   }
 
   @Override
-  public boolean onOptionsItemSelected(MenuItem item) {
+  public boolean onOptionsItemSelected(@NonNull MenuItem item) {
     super.onOptionsItemSelected(item);
     fullscreenControlsManager.delayHideTheControls();
     Bundle menuEventBundle = new Bundle();
@@ -638,7 +636,7 @@ public class DynamicStarMapActivity extends androidx.fragment.app.FragmentActivi
       Log.d(TAG, "Toggling nightmode");
       nightMode = !nightMode;
       sharedPreferences.edit().putString(ActivityLightLevelManager.LIGHT_MODE_KEY,
-          nightMode ? "NIGHT" : "DAY").commit();
+          nightMode ? "NIGHT" : "DAY").apply();
       menuEventBundle.putString(Analytics.MENU_ITEM_EVENT_VALUE, Analytics.TOGGLED_NIGHT_MODE_LABEL);
     } else if (itemId == R.id.menu_item_time || itemId == R.id.menu_item_time2) {
       Log.d(TAG, "Starting Time Dialog from menu");
@@ -754,7 +752,7 @@ public class DynamicStarMapActivity extends androidx.fragment.app.FragmentActivi
       if (state instanceof LocationState.AcquiringTimeout) {
         AcquiringLocationTimeoutDialogFragment dlg =
             AcquiringLocationTimeoutDialogFragment.newInstance();
-        dlg.setOnKeepWaiting(() -> lc.keepWaiting());
+        dlg.setOnKeepWaiting(lc::keepWaiting);
         dlg.setOnEnterManually(() -> showManualEntryDialog(lc));
         showDialog(dlg, AcquiringLocationTimeoutDialogFragment.class.getSimpleName());
       } else if (state instanceof LocationState.PermissionDenied) {
@@ -779,8 +777,7 @@ public class DynamicStarMapActivity extends androidx.fragment.app.FragmentActivi
     LocationState state = lc.currentState();
     float lat = Float.NaN, lon = Float.NaN;
     String name = "";
-    if (state instanceof LocationState.Confirmed) {
-      LocationState.Confirmed confirmed = (LocationState.Confirmed) state;
+    if (state instanceof LocationState.Confirmed confirmed) {
       lat = confirmed.getLocation().getLatitude();
       lon = confirmed.getLocation().getLongitude();
     }
@@ -823,10 +820,6 @@ public class DynamicStarMapActivity extends androidx.fragment.app.FragmentActivi
     if (state instanceof LocationState.Unset || state instanceof LocationState.PermissionDenied) {
       startLocationFlow();
     }
-  }
-
-  public void setTimeTravelMode(Date newTime) {
-    setTimeTravelMode(newTime, 0, "custom");
   }
 
   public void setTimeTravelMode(Date newTime, @StringRes int searchObjectNameRes,
@@ -978,10 +971,7 @@ public class DynamicStarMapActivity extends androidx.fragment.app.FragmentActivi
     // Log.d(TAG, "Touch event " + event);
     // Either of the following detectors can absorb the event, but one
     // must not hide it from the other
-    boolean eventAbsorbed = false;
-    if (event != null && gestureDetector.onTouchEvent(event)) {
-      eventAbsorbed = true;
-    }
+    boolean eventAbsorbed = event != null && gestureDetector.onTouchEvent(event);
     if (event != null && dragZoomRotateDetector.onTouchEvent(event)) {
       eventAbsorbed = true;
     }
@@ -1003,7 +993,7 @@ public class DynamicStarMapActivity extends androidx.fragment.app.FragmentActivi
   }
 
   @Override
-  public void onSeeAlsoClicked(String objectId) {
+  public void onSeeAlsoClicked(@NonNull String objectId) {
     ObjectInfo info = objectInfoRegistry.getInfo(objectId);
     if (info != null) {
       showObjectInfoDialog(info);
@@ -1264,11 +1254,9 @@ public class DynamicStarMapActivity extends androidx.fragment.app.FragmentActivi
   }
 
   @Override
-  protected void onRestoreInstanceState(Bundle icicle) {
+  protected void onRestoreInstanceState(@NonNull Bundle icicle) {
     Log.d(TAG, "DynamicStarMap onRestoreInstanceState");
     super.onRestoreInstanceState(icicle);
-    if (icicle == null)
-      return;
     searchMode = icicle.getBoolean(ApplicationConstants.BUNDLE_SEARCH_MODE);
     float x = icicle.getFloat(ApplicationConstants.BUNDLE_X_TARGET);
     float y = icicle.getFloat(ApplicationConstants.BUNDLE_Y_TARGET);
@@ -1390,6 +1378,7 @@ public class DynamicStarMapActivity extends androidx.fragment.app.FragmentActivi
 
   @Override
   protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    super.onActivityResult(requestCode, resultCode, data);
     if (requestCode == GOOGLE_PLAY_SERVICES_REQUEST_CODE) {
       playServicesChecker.runAfterDialog();
       return;
@@ -1399,8 +1388,9 @@ public class DynamicStarMapActivity extends androidx.fragment.app.FragmentActivi
 
   @Override
   public void onRequestPermissionsResult(int requestCode,
-      String[] permissions,
-      int[] grantResults) {
+                                         @NonNull String[] permissions,
+                                         @NonNull int[] grantResults) {
+    super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     Log.w(TAG, "Unhandled request permissions result: " + requestCode);
   }
 }
