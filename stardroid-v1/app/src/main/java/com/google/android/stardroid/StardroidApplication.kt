@@ -29,7 +29,6 @@ import androidx.preference.PreferenceManager
 import com.google.android.stardroid.activities.util.ActivityLightLevelManager
 import com.google.android.stardroid.layers.LayerManager
 import com.google.android.stardroid.util.AnalyticsInterface
-import com.google.android.stardroid.util.AssetImageLoader
 import com.google.android.stardroid.util.MiscUtil.getTag
 import com.google.android.stardroid.util.PreferenceChangeAnalyticsTracker
 import com.google.android.stardroid.views.PreferencesButton
@@ -132,11 +131,6 @@ open class StardroidApplication : Application() {
     // Since it's a lazy property, we can't easily check initialization without triggering it
     // unless we use a different mechanism.
     // For now, let's just catch the exception or move it to performHiltInitialization if appropriate.
-  }
-
-  override fun onTrimMemory(level: Int) {
-    super.onTrimMemory(level)
-    AssetImageLoader.onTrimMemory(level)
   }
 
   // TODO(jontayler): update to use the info created by gradle.

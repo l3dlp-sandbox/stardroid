@@ -30,8 +30,8 @@ import com.google.android.stardroid.activities.util.ActivityLightLevelManager
 import com.google.android.stardroid.activities.util.NightModeHelper
 import com.google.android.stardroid.education.ObjectInfo
 import com.google.android.stardroid.education.ObjectInfoRegistry
-import com.google.android.stardroid.util.AssetImageLoader
-import com.google.android.stardroid.util.ImageLoadHandle
+import coil.load
+import coil.request.Disposable
 import com.google.android.stardroid.util.MiscUtil
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -47,7 +47,7 @@ import javax.inject.Inject
 class ObjectInfoDialogFragment : DialogFragment() {
     @Inject lateinit var preferences: SharedPreferences
     @Inject lateinit var objectInfoRegistry: ObjectInfoRegistry
-    private var imageLoadHandle: ImageLoadHandle? = null
+    private var imageDisposable: Disposable? = null
 
     /** Implemented by activities that host this dialog and want to handle the Find action. */
     interface OnFindClickedListener {
@@ -105,18 +105,17 @@ class ObjectInfoDialogFragment : DialogFragment() {
         val imageContainer = view.findViewById<View>(R.id.object_info_image_container)
         val imageView = view.findViewById<ImageView>(R.id.object_info_image)
         if (info.imagePath != null) {
-            imageLoadHandle = AssetImageLoader.loadBitmapAsync(parentActivity.assets, info.imagePath) { bitmap ->
-                if (bitmap != null && isAdded) {
-                    imageView.setImageBitmap(bitmap)
-                    if (isNight) {
-                        imageView.setColorFilter(nightTextColor, PorterDuff.Mode.MULTIPLY)
-                    }
+            imageDisposable = imageView.load("file:///android_asset/${info.imagePath}") {
+                crossfade(true)
+                listener(onSuccess = { _, _ ->
+                    if (!isAdded) return@listener
+                    if (isNight) imageView.setColorFilter(nightTextColor, PorterDuff.Mode.MULTIPLY)
                     imageContainer.visibility = View.VISIBLE
                     imageContainer.setOnClickListener {
                         ImageExpandDialogFragment.newInstance(info.imagePath, info.imageCredit)
                             .show(parentFragmentManager, "ExpandedImage")
                     }
-                }
+                })
             }
         }
 
@@ -218,8 +217,8 @@ class ObjectInfoDialogFragment : DialogFragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        imageLoadHandle?.cancel()
-        imageLoadHandle = null
+        imageDisposable?.dispose()
+        imageDisposable = null
     }
 
     companion object {
