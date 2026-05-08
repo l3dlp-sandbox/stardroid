@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import android.hardware.Sensor
 import android.hardware.SensorManager
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,6 +24,8 @@ import coil.load
 import com.google.android.stardroid.ApplicationConstants
 import com.google.android.stardroid.R
 import com.google.android.stardroid.StardroidApplication
+import com.google.android.stardroid.control.LocationController
+import com.google.android.stardroid.util.MiscUtil
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -63,6 +66,11 @@ class WarmWelcomeActivity : AppCompatActivity() {
                     btnNextFinish.setText(R.string.warm_welcome_finish)
                 } else {
                     btnNextFinish.setText(R.string.warm_welcome_next)
+                }
+                val fragment = supportFragmentManager.findFragmentByTag("f$position")
+                if (fragment is Animatable) {
+                    Log.w(TAG, "Reanimating")
+                    fragment.onSelected()
                 }
             }
         })
@@ -107,7 +115,7 @@ class WarmWelcomeActivity : AppCompatActivity() {
     private fun finishWelcome() {
         if (!isManualInvocation) {
             sharedPreferences.edit().apply {
-                putLong(ApplicationConstants.READ_WARM_WELCOME_PREF_VERSION, app.version.toLong())
+                putLong(ApplicationConstants.READ_WARM_WELCOME_PREF_VERSION, app.version)
                 putBoolean(ApplicationConstants.NO_WARN_ABOUT_MISSING_SENSORS, true)
                 apply()
             }
@@ -118,7 +126,7 @@ class WarmWelcomeActivity : AppCompatActivity() {
         finish()
     }
 
-    private inner class WelcomePagerAdapter(fa: AppCompatActivity) : FragmentStateAdapter(fa) {
+    private class WelcomePagerAdapter(fa: AppCompatActivity) : FragmentStateAdapter(fa) {
         override fun createFragment(position: Int): Fragment {
             return when (position) {
                 0 -> Slide1Fragment()
@@ -131,6 +139,9 @@ class WarmWelcomeActivity : AppCompatActivity() {
         override fun getItemCount(): Int = 3
     }
 
+    interface Animatable {
+        fun onSelected();
+    }
     class Slide1Fragment : Fragment() {
         private val handler = android.os.Handler(android.os.Looper.getMainLooper())
         private var currentIndex = 0
@@ -165,7 +176,7 @@ class WarmWelcomeActivity : AppCompatActivity() {
                 }
                 
                 // Post next
-                handler.postDelayed(this, 2000)
+                handler.postDelayed(this, 1000)
             }
         }
 
@@ -210,7 +221,14 @@ class WarmWelcomeActivity : AppCompatActivity() {
         }
     }
 
-    class Slide3Fragment : Fragment() {
+    class Slide3Fragment : Fragment(), Animatable {
+        private lateinit var messageText: TextView
+        private lateinit var compassIcon: ImageView
+        private lateinit var accelIcon: ImageView
+        private lateinit var gyroIcon: ImageView
+        private lateinit var gyroSpinner: View
+        private lateinit var accelSpinner: View
+        private lateinit var compassSpinner: View
         private val handler = android.os.Handler(android.os.Looper.getMainLooper())
 
         override fun onCreateView(
@@ -222,15 +240,15 @@ class WarmWelcomeActivity : AppCompatActivity() {
                     crossfade(true)
                 }
 
-            val compassIcon = view.findViewById<ImageView>(R.id.compass_status_icon)
-            val accelIcon = view.findViewById<ImageView>(R.id.accelerometer_status_icon)
-            val gyroIcon = view.findViewById<ImageView>(R.id.gyroscope_status_icon)
-            
-            val compassSpinner = view.findViewById<View>(R.id.compass_status_spinner)
-            val accelSpinner = view.findViewById<View>(R.id.accelerometer_status_spinner)
-            val gyroSpinner = view.findViewById<View>(R.id.gyroscope_status_spinner)
-            
-            val messageText = view.findViewById<TextView>(R.id.sensor_message_text)
+            compassSpinner = view.findViewById<View>(R.id.compass_status_spinner)
+            accelSpinner = view.findViewById<View>(R.id.accelerometer_status_spinner)
+            gyroSpinner = view.findViewById<View>(R.id.gyroscope_status_spinner)
+
+            compassIcon = view.findViewById<ImageView>(R.id.compass_status_icon)
+            accelIcon = view.findViewById<ImageView>(R.id.accelerometer_status_icon)
+            gyroIcon = view.findViewById<ImageView>(R.id.gyroscope_status_icon)
+
+            messageText = view.findViewById<TextView>(R.id.sensor_message_text)
 
             val activity = requireActivity() as WarmWelcomeActivity
             val sensorManager = activity.sensorManager
@@ -239,15 +257,35 @@ class WarmWelcomeActivity : AppCompatActivity() {
             val hasAccel = sensorManager?.getDefaultSensor(android.hardware.Sensor.TYPE_ACCELEROMETER) != null
             val hasGyro = sensorManager?.getDefaultSensor(android.hardware.Sensor.TYPE_GYROSCOPE) != null
 
+            val goodColor = ContextCompat.getColor(requireContext(), R.color.status_good)
+            val badColor = ContextCompat.getColor(requireContext(), R.color.status_bad)
+
             compassIcon.setImageResource(if (hasCompass) R.drawable.ic_check_circle else R.drawable.ic_warning)
+            compassIcon.setColorFilter(if (hasCompass) goodColor else badColor)
+
             accelIcon.setImageResource(if (hasAccel) R.drawable.ic_check_circle else R.drawable.ic_warning)
+            accelIcon.setColorFilter(if (hasAccel) goodColor else badColor)
+
             gyroIcon.setImageResource(if (hasGyro) R.drawable.ic_check_circle else R.drawable.ic_warning)
+            gyroIcon.setColorFilter(if (hasGyro) goodColor else badColor)
 
             if (!hasCompass || !hasAccel) {
                 messageText.setText(R.string.warm_welcome_slide3_no_sensors)
             } else {
                 messageText.setText(R.string.warm_welcome_slide3_compass_calib)
             }
+
+            return view
+        }
+
+        override fun onDestroyView() {
+            super.onDestroyView()
+            handler.removeCallbacksAndMessages(null)
+        }
+
+        override fun onSelected() {
+            listOf(compassSpinner, accelSpinner, gyroSpinner).forEach { it.visibility = View.VISIBLE }
+            listOf(compassIcon, accelIcon, gyroIcon, messageText).forEach { it.visibility = View.GONE }
 
             handler.postDelayed({
                 if (isAdded) {
@@ -270,13 +308,9 @@ class WarmWelcomeActivity : AppCompatActivity() {
                     messageText.visibility = View.VISIBLE
                 }
             }, 2400)
-
-            return view
         }
-
-        override fun onDestroyView() {
-            super.onDestroyView()
-            handler.removeCallbacksAndMessages(null)
-        }
+    }
+    companion object {
+        private val TAG = MiscUtil.getTag(WarmWelcomeActivity::class.java)
     }
 }
