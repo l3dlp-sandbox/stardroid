@@ -86,6 +86,7 @@ import com.google.android.stardroid.control.AstronomerModel;
 import com.google.android.stardroid.control.AstronomerModel.Pointing;
 import com.google.android.stardroid.control.ControllerGroup;
 import com.google.android.stardroid.control.LocationController;
+import com.google.android.stardroid.control.LocationSource;
 import com.google.android.stardroid.control.LocationState;
 import com.google.android.stardroid.control.MagneticDeclinationCalculatorSwitcher;
 import com.google.android.stardroid.control.TransitioningCompositeClock;
