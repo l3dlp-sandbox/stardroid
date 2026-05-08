@@ -43,16 +43,22 @@ Five reusable worktrees live under `.worktrees/` in the repo root:
 | stardroid-delta | `.worktrees/stardroid-delta` | `worktree/stardroid-delta` |
 | stardroid-epsilon | `.worktrees/stardroid-epsilon` | `worktree/stardroid-epsilon` |
 
-**To claim a worktree for a task:** check out your feature branch inside it:
-```
-git -C .worktrees/stardroid-alpha checkout -b feature/my-task
+### Worktree lifecycle
+
+**1. Claim a worktree for a new task** — fetch latest master, then branch from it:
+```bash
+git fetch origin
+git -C .worktrees/stardroid-alpha checkout -b feature/my-task origin/master
 ```
 
-**To reset a worktree** when done (returns it to its placeholder branch):
-```
+**2. Reset a worktree when done** — return it to its placeholder branch so the feature branch
+can be deleted:
+```bash
 git -C .worktrees/stardroid-alpha checkout worktree/stardroid-alpha
-git branch -D feature/my-task   # if the branch was merged or is no longer needed
 ```
+After resetting all affected worktrees, run `/clean-branches` to delete the merged feature
+branches. That skill uses `git branch -d` (safe delete) and will skip any branch still checked
+out in a worktree.
 
 Each worktree already contains the build-critical files excluded from version control
 (`stardroid-v1/local.properties`, `stardroid-v1/app/local.properties`,
