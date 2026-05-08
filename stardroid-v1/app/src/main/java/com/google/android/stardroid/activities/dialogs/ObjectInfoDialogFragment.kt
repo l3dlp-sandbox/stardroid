@@ -108,10 +108,15 @@ class ObjectInfoDialogFragment : DialogFragment() {
             val assetUri = "file:///android_asset/${info.imagePath}"
             imageDisposable = imageView.load(assetUri) {
                 crossfade(true)
-                listener(onSuccess = { _, _ ->
-                    if (!isAdded) return@listener
-                    if (isNight) imageView.setColorFilter(nightTextColor, PorterDuff.Mode.MULTIPLY)
-                })
+                listener(
+                    onSuccess = { _, _ ->
+                        if (!isAdded) return@listener
+                        if (isNight) imageView.setColorFilter(nightTextColor, PorterDuff.Mode.MULTIPLY)
+                    },
+                    onError = { _, result ->
+                        Log.w(TAG, "Failed to load image: $assetUri", result.throwable)
+                    }
+                )
             }
             if (isAdded) {
                 imageContainer.visibility = View.VISIBLE

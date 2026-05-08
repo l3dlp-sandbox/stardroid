@@ -14,6 +14,7 @@ package com.google.android.stardroid.activities.dialogs
 import android.content.SharedPreferences
 import android.graphics.PorterDuff
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -56,9 +57,14 @@ class ImageExpandDialogFragment : DialogFragment() {
         if (imagePath != null) {
             imageDisposable = imageView.load("file:///android_asset/$imagePath") {
                 crossfade(true)
-                listener(onSuccess = { _, _ ->
-                    if (isNight) imageView.setColorFilter(nightTextColor, PorterDuff.Mode.MULTIPLY)
-                })
+                listener(
+                    onSuccess = { _, _ ->
+                        if (isNight) imageView.setColorFilter(nightTextColor, PorterDuff.Mode.MULTIPLY)
+                    },
+                    onError = { _, result ->
+                        Log.w("ImageExpandDialogFragment", "Failed to load image: $imagePath", result.throwable)
+                    }
+                )
             }
         }
 
