@@ -28,8 +28,8 @@ class StadiaMapsAdapter @Inject constructor(
     private var lastLocation: LatLong? = null
 
     private sealed class LoadResult {
-        object Loading : LoadResult()
-        object Success : LoadResult()
+        data object Loading : LoadResult()
+        data object Success : LoadResult()
         data class Failure(val errorCode: String) : LoadResult()
     }
 
