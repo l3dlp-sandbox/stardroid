@@ -25,7 +25,7 @@ Options:
     --input PATH          Portrait/source image (required)
     --label TEXT          Release label, e.g. "Venus" (default: Venus)
     --output PATH         Output image path (.jpg or .webp); format is inferred from extension
-    --crop x1,y1,x2,y2   Pixel crop of input before compositing.
+    --crop x1,y1,x2,y2    Pixel crop of input before compositing.
                           Use a square region centred on the face to avoid distortion.
     --splash PATH         Override base splash (default: res/drawable/stardroid_big_image.webp)
     --strip-height FRAC   Strip height as fraction of splash height (default: 0.13)
