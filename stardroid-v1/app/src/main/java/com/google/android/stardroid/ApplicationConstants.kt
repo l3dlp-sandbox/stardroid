@@ -79,7 +79,8 @@ object ApplicationConstants {
 
   // Feature flags
   /** Set to true to enable the warm welcome onboarding flow. */
-  const val WARM_WELCOME_ENABLED = false
+  // Clean this up when done.
+  const val WARM_WELCOME_ENABLED = true
 
   // Location
   const val LOCATION_UPDATE_MIN_DISTANCE_METRES = 2000f
