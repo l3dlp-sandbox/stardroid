@@ -20,6 +20,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
+import coil.load
 import com.google.android.stardroid.ApplicationConstants
 import com.google.android.stardroid.R
 import com.google.android.stardroid.StardroidApplication
@@ -205,15 +206,10 @@ class WarmWelcomeActivity : AppCompatActivity() {
 
         override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
             super.onViewCreated(view, savedInstanceState)
-            val bgView = view.findViewById<ImageView>(R.id.slide2_background)
-            try {
-                requireContext().assets.open("celestial_images/deep_sky_objects/hubble_m1.jpg").use { istr ->
-                    val drawable = android.graphics.drawable.Drawable.createFromStream(istr, null)
-                    bgView.setImageDrawable(drawable)
+            view.findViewById<ImageView>(R.id.slide2_background)
+                .load("file:///android_asset/celestial_images/deep_sky_objects/hubble_m1.jpg") {
+                    crossfade(true)
                 }
-            } catch (e: Exception) {
-                Log.e(TAG, "Error loading background image", e)
-            }
         }
     }
 
@@ -224,15 +220,10 @@ class WarmWelcomeActivity : AppCompatActivity() {
             inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
         ): View {
             val view = inflater.inflate(R.layout.fragment_welcome_slide_3, container, false)
-            try {
-                val bgView = view.findViewById<ImageView>(R.id.slide3_background)
-                requireContext().assets.open("celestial_images/planets/cassini_iapetus.webp").use { istr ->
-                    val drawable = android.graphics.drawable.Drawable.createFromStream(istr, null)
-                    bgView.setImageDrawable(drawable)
+            view.findViewById<ImageView>(R.id.slide3_background)
+                .load("file:///android_asset/celestial_images/planets/cassini_iapetus.webp") {
+                    crossfade(true)
                 }
-            } catch (e: Exception) {
-                Log.e(TAG, "Error loading background image", e)
-            }
 
             val compassIcon = view.findViewById<ImageView>(R.id.compass_status_icon)
             val accelIcon = view.findViewById<ImageView>(R.id.accelerometer_status_icon)
