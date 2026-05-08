@@ -267,7 +267,7 @@ Your phone reports its compass accuracy as shown above. To improve this, please 
 
     <string name="warm_welcome_title" translation_description="Title of the Warm Welcome screen">Welcome to Sky Map</string>
     <string name="warm_welcome_slide1_title" translation_description="Title for the first slide of the Warm Welcome">Explore the Cosmos</string>
-    <string name="warm_welcome_slide1_desc" translation_description="Description for the first slide of the Warm Welcome">Toggle the layers on the left to see stars, constellations, planets, and more. Tap the clock icon to travel through time, or the moon icon for night mode.</string>
+    <string name="warm_welcome_slide1_desc" translation_description="Description for the first slide of the Warm Welcome">Toggle the layers on the left to see stars, constellations, planets, and more. Tap the vortex icon to travel through time, or the eye icon for night mode.</string>
     <string name="warm_welcome_slide2_title" translation_description="Title for the second slide of the Warm Welcome">Navigate the Sky</string>
     <string name="warm_welcome_slide2_desc" translation_description="Description for the second slide of the Warm Welcome">Point your phone to look around in Auto mode, or tap the button to switch to Manual mode and swipe with your fingers. Double-tap to re-level the horizon in manual mode.</string>
     <string name="warm_welcome_slide2_info_desc" translation_description="Description about info cards on the second slide">Tap celestial objects in Manual mode to show Info Cards with fun facts and details.</string>
@@ -285,7 +285,7 @@ Your phone reports its compass accuracy as shown above. To improve this, please 
 
     <string name="warm_welcome_skip" translation_description="Button to skip the Warm Welcome">Skip</string>
     <string name="warm_welcome_next" translation_description="Button to go to the next slide">Next</string>
-    <string name="warm_welcome_finish" translation_description="Button to finish the Warm Welcome and start exploring">Start Exploring</string>
+    <string name="warm_welcome_finish" translation_description="Button to finish the Warm Welcome and start exploring. Needs to be short - the width of 9 letter Ms maximum.">Launch!</string>
     <string name="warm_welcome_do_not_show" translation_description="Checkbox to not show the Warm Welcome again">Do not show this automatically again</string>
     <string name="menu_tutorial" translation_description="Menu item for re-showing the warm welcome tutorial">Tutorial</string>
     <string name="warm_welcome_sensor_ok" translation_description="Status when a sensor is working fine">Working</string>

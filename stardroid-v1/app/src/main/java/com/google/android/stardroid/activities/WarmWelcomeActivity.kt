@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import android.hardware.Sensor
 import android.hardware.SensorManager
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,6 +23,8 @@ import androidx.viewpager2.widget.ViewPager2
 import com.google.android.stardroid.ApplicationConstants
 import com.google.android.stardroid.R
 import com.google.android.stardroid.StardroidApplication
+import com.google.android.stardroid.control.LocationController
+import com.google.android.stardroid.util.MiscUtil
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -106,7 +109,7 @@ class WarmWelcomeActivity : AppCompatActivity() {
     private fun finishWelcome() {
         if (!isManualInvocation) {
             sharedPreferences.edit().apply {
-                putLong(ApplicationConstants.READ_WARM_WELCOME_PREF_VERSION, app.version.toLong())
+                putLong(ApplicationConstants.READ_WARM_WELCOME_PREF_VERSION, app.version)
                 putBoolean(ApplicationConstants.NO_WARN_ABOUT_MISSING_SENSORS, true)
                 apply()
             }
@@ -117,7 +120,7 @@ class WarmWelcomeActivity : AppCompatActivity() {
         finish()
     }
 
-    private inner class WelcomePagerAdapter(fa: AppCompatActivity) : FragmentStateAdapter(fa) {
+    private class WelcomePagerAdapter(fa: AppCompatActivity) : FragmentStateAdapter(fa) {
         override fun createFragment(position: Int): Fragment {
             return when (position) {
                 0 -> Slide1Fragment()
@@ -164,7 +167,7 @@ class WarmWelcomeActivity : AppCompatActivity() {
                 }
                 
                 // Post next
-                handler.postDelayed(this, 2000)
+                handler.postDelayed(this, 1000)
             }
         }
 
@@ -209,7 +212,7 @@ class WarmWelcomeActivity : AppCompatActivity() {
                     bgView.setImageDrawable(drawable)
                 }
             } catch (e: Exception) {
-                e.printStackTrace()
+                Log.e(TAG, "Error loading background image", e)
             }
         }
     }
@@ -221,14 +224,14 @@ class WarmWelcomeActivity : AppCompatActivity() {
             inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
         ): View {
             val view = inflater.inflate(R.layout.fragment_welcome_slide_3, container, false)
-            val bgView = view.findViewById<ImageView>(R.id.slide3_background)
             try {
+                val bgView = view.findViewById<ImageView>(R.id.slide3_background)
                 requireContext().assets.open("celestial_images/planets/cassini_iapetus.webp").use { istr ->
                     val drawable = android.graphics.drawable.Drawable.createFromStream(istr, null)
                     bgView.setImageDrawable(drawable)
                 }
             } catch (e: Exception) {
-                e.printStackTrace()
+                Log.e(TAG, "Error loading background image", e)
             }
 
             val compassIcon = view.findViewById<ImageView>(R.id.compass_status_icon)
@@ -287,5 +290,8 @@ class WarmWelcomeActivity : AppCompatActivity() {
             super.onDestroyView()
             handler.removeCallbacksAndMessages(null)
         }
+    }
+    companion object {
+        private val TAG = MiscUtil.getTag(WarmWelcomeActivity::class.java)
     }
 }
