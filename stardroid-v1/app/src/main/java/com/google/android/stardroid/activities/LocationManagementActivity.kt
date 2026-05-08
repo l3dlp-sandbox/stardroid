@@ -42,6 +42,7 @@ class LocationManagementActivity : FragmentActivity(),
 
     private lateinit var sourceLabel: TextView
     private lateinit var coordinatesLabel: TextView
+    private lateinit var fallbackLabel: TextView
     private lateinit var mapContainer: FrameLayout
     private lateinit var modeToggleButton: Button
     private lateinit var changeButton: Button
@@ -68,6 +69,7 @@ class LocationManagementActivity : FragmentActivity(),
 
         sourceLabel = findViewById<TextView>(R.id.location_source_label)
         coordinatesLabel = findViewById<TextView>(R.id.location_coordinates_label)
+        fallbackLabel = findViewById<TextView>(R.id.map_unavailable_label)
         mapContainer = findViewById<FrameLayout>(R.id.map_container)
         modeToggleButton = findViewById<Button>(R.id.location_mode_toggle_button)
         changeButton = findViewById<Button>(R.id.location_change_button)
@@ -211,21 +213,21 @@ class LocationManagementActivity : FragmentActivity(),
                 coordinatesLabel.visibility = View.GONE
                 modeToggleButton.text = getString(R.string.location_switch_to_manual)
                 changeButton.visibility = View.GONE
-                showMapMessage(getString(R.string.location_map_acquiring))
+                showFallbackLabel(R.string.location_map_acquiring)
             }
             is LocationState.HardwareUnavailable -> {
                 sourceLabel.text = getString(R.string.location_source_hardware_unavailable)
                 coordinatesLabel.visibility = View.GONE
                 modeToggleButton.visibility = View.GONE
                 changeButton.visibility = View.GONE
-                showMapMessage(getString(R.string.location_source_hardware_unavailable))
+                showFallbackLabel(R.string.location_source_hardware_unavailable)
             }
             else -> {
                 sourceLabel.text = getString(R.string.location_source_unset)
                 coordinatesLabel.visibility = View.GONE
                 modeToggleButton.text = getString(R.string.location_switch_to_auto)
                 changeButton.visibility = View.GONE
-                showMapMessage(getString(R.string.location_map_no_location))
+                showFallbackLabel(R.string.location_map_no_location)
             }
         }
     }
@@ -240,23 +242,11 @@ class LocationManagementActivity : FragmentActivity(),
     }
     private fun updateMapPin(state: LocationState.Confirmed) {
         mapAdapter.updateLocation(state.location)
-        showMapMessage(getString(
-            R.string.location_long_lat,
-            state.location.longitude, state.location.latitude))
     }
-    private fun showMapMessage(message: String) {
+    private fun showFallbackLabel(messageResId: Int) {
+        fallbackLabel.text = getString(messageResId)
+        fallbackLabel.visibility = View.VISIBLE
         val mapView = findViewById<View>(R.id.map_view)
-        val fallbackLabel = findViewById<TextView>(R.id.map_unavailable_label)
-        
-        if (fallbackLabel != null) {
-            fallbackLabel.text = message
-            fallbackLabel.visibility = View.VISIBLE
-        }
-        
-        // Hide map view while showing a message, unless the message is just coordinate info
-        // being shown as a placeholder for a confirmed location.
-        if (locationController.currentState() !is LocationState.Confirmed) {
-            mapView?.visibility = View.GONE
-        }
+        mapView?.visibility = View.GONE
     }
 }
