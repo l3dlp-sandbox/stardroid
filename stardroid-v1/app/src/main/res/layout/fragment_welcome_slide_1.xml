@@ -39,7 +39,19 @@
     <ImageView android:id="@+id/icon_planets" android:layout_width="wrap_content" android:layout_height="wrap_content" android:paddingLeft="5dp" android:paddingTop="7dp" android:paddingBottom="7dp" android:paddingRight="10dp" android:src="@drawable/planet_on" android:layout_marginStart="16dp" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toBottomOf="@+id/icon_deep_sky" app:layout_constraintBottom_toTopOf="@+id/icon_meteors" />
     <ImageView android:id="@+id/icon_meteors" android:layout_width="wrap_content" android:layout_height="wrap_content" android:paddingLeft="5dp" android:paddingTop="7dp" android:paddingBottom="7dp" android:paddingRight="10dp" android:src="@drawable/b_meteor_on" android:layout_marginStart="16dp" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toBottomOf="@+id/icon_planets" app:layout_constraintBottom_toTopOf="@+id/icon_grid" />
     <ImageView android:id="@+id/icon_grid" android:layout_width="wrap_content" android:layout_height="wrap_content" android:paddingLeft="5dp" android:paddingTop="7dp" android:paddingBottom="7dp" android:paddingRight="10dp" android:src="@drawable/grid_on" android:layout_marginStart="16dp" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toBottomOf="@+id/icon_meteors" app:layout_constraintBottom_toTopOf="@+id/icon_horizon" />
-    <ImageView android:id="@+id/icon_horizon" android:layout_width="wrap_content" android:layout_height="wrap_content" android:paddingLeft="5dp" android:paddingTop="7dp" android:paddingBottom="11dp" android:paddingRight="10dp" android:src="@drawable/horizon_on" android:layout_marginStart="16dp" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toBottomOf="@+id/icon_grid" app:layout_constraintBottom_toBottomOf="parent" />
+    <ImageView
+        android:id="@+id/icon_horizon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="5dp"
+        android:paddingTop="7dp"
+        android:paddingBottom="11dp"
+        android:paddingEnd="10dp"
+        android:src="@drawable/horizon_on"
+        android:layout_marginStart="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/icon_grid"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_text_container" />
 
     <ImageView
         android:id="@+id/icon_manual_auto"
