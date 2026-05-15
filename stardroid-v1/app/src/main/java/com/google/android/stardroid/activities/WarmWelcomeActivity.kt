@@ -2,7 +2,10 @@ package com.google.android.stardroid.activities
 
 import android.content.Intent
 import android.hardware.SensorManager
+import android.os.Build
 import android.os.Bundle
+import android.os.Vibrator
+import android.os.VibrationEffect
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -31,6 +34,7 @@ class WarmWelcomeActivity : AppCompatActivity(), WhatsNewDialogFragment.CloseLis
 
     @Inject lateinit var startupRouter: StartupRouter
     @Inject @JvmField var sensorManager: SensorManager? = null
+    @Inject @JvmField var vibrator: Vibrator? = null
     @Inject lateinit var analytics: Analytics
     private var lastLoggedPosition = -1
 
@@ -179,6 +183,21 @@ class WarmWelcomeActivity : AppCompatActivity(), WhatsNewDialogFragment.CloseLis
         finish()
     }
 
+    fun buzz(happy: Boolean) {
+        val v = vibrator ?: return
+    fun buzz(happy: Boolean) {
+        val v = vibrator ?: return
+        if (!v.hasVibrator()) return
+        val effect = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            val effectId = if (happy) VibrationEffect.EFFECT_CLICK else VibrationEffect.EFFECT_DOUBLE_CLICK
+            VibrationEffect.createPredefined(effectId)
+        } else {
+            if (happy) VibrationEffect.createOneShot(50, VibrationEffect.DEFAULT_AMPLITUDE)
+            else VibrationEffect.createWaveform(longArrayOf(0, 80, 80, 80), -1)
+        }
+        v.vibrate(effect)
+    }
+
     private class WelcomePagerAdapter(fa: AppCompatActivity) : FragmentStateAdapter(fa) {
         override fun createFragment(position: Int): Fragment {
             return when (position) {
@@ -283,6 +302,9 @@ class WarmWelcomeActivity : AppCompatActivity(), WhatsNewDialogFragment.CloseLis
         private lateinit var accelSpinner: View
         private lateinit var compassSpinner: View
         private val handler = android.os.Handler(android.os.Looper.getMainLooper())
+        private var hasCompass = false
+        private var hasAccel = false
+        private var hasGyro = false
 
         override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -306,9 +328,9 @@ class WarmWelcomeActivity : AppCompatActivity(), WhatsNewDialogFragment.CloseLis
             val activity = requireActivity() as WarmWelcomeActivity
             val sensorManager = activity.sensorManager
 
-            val hasCompass = sensorManager?.getDefaultSensor(android.hardware.Sensor.TYPE_MAGNETIC_FIELD) != null
-            val hasAccel = sensorManager?.getDefaultSensor(android.hardware.Sensor.TYPE_ACCELEROMETER) != null
-            val hasGyro = sensorManager?.getDefaultSensor(android.hardware.Sensor.TYPE_GYROSCOPE) != null
+            hasCompass = sensorManager?.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD) != null
+            hasAccel = sensorManager?.getDefaultSensor(Sensor.TYPE_ACCELEROMETER) != null
+            hasGyro = sensorManager?.getDefaultSensor(Sensor.TYPE_GYROSCOPE) != null
 
             val goodColor = ContextCompat.getColor(requireContext(), R.color.status_good)
             val badColor = ContextCompat.getColor(requireContext(), R.color.status_bad)
@@ -344,6 +366,7 @@ class WarmWelcomeActivity : AppCompatActivity(), WhatsNewDialogFragment.CloseLis
                 if (isAdded) {
                     compassSpinner.visibility = View.GONE
                     compassIcon.visibility = View.VISIBLE
+                    (activity as? WarmWelcomeActivity)?.buzz(hasCompass)
                 }
             }, 800)
 
@@ -351,6 +374,7 @@ class WarmWelcomeActivity : AppCompatActivity(), WhatsNewDialogFragment.CloseLis
                 if (isAdded) {
                     accelSpinner.visibility = View.GONE
                     accelIcon.visibility = View.VISIBLE
+                    (activity as? WarmWelcomeActivity)?.buzz(hasAccel)
                 }
             }, 1600)
 
@@ -359,6 +383,7 @@ class WarmWelcomeActivity : AppCompatActivity(), WhatsNewDialogFragment.CloseLis
                     gyroSpinner.visibility = View.GONE
                     gyroIcon.visibility = View.VISIBLE
                     messageText.visibility = View.VISIBLE
+                    (activity as? WarmWelcomeActivity)?.buzz(hasGyro)
                 }
             }, 2400)
         }
